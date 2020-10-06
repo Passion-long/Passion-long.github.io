@@ -91,4 +91,9 @@ class MyCallable implements Callable {
   
 5. 非静态方法不存在线程安全的问题。  
   
-
+6. UML中有哪些常用的图？  
+* 用例图  
+* 类图  
+* 时序图  
+  
+7. 
