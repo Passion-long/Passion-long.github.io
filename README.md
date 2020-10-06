@@ -6,6 +6,6 @@
 4. [数据库.md](https://github.com/Passion-long/Passion-long.github.io/blob/master/%E6%95%B0%E6%8D%AE%E5%BA%93.md)  
 5. [计算机网络.md](https://github.com/Passion-long/Passion-long.github.io/blob/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.md)  
 6. [设计模式.md](https://github.com/Passion-long/Passion-long.github.io/blob/master/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.md)  
-  
+7. [Android.md](https://github.com/Passion-long/Passion-long.github.io/blob/master/Android.md)  
 部分参考：  
 [Waking-Up](https://github.com/wolverinn/Waking-Up)
