@@ -1,5 +1,7 @@
+[toc]  
+  
 # JAVA
-**1. Error和Exception的区别？**  
+####**1. Error和Exception的区别？**  
 首先，所有的异常都是由Throwable继承而来，但在下一层立即分解为两个分支：Error和Exception  
   
 **Error**  
@@ -11,7 +13,7 @@
 * 表示一个由程序员导致的错误  
 * 应该在应用程序级被处理  
   
-**2. 抽象类和接口的区别是什么？**  
+####**2. 抽象类和接口的区别是什么？**  
   
 抽象类：  
 *  和普通类（非abstract类）相比，abstract类中可以有abstract方法（非abstract类中不可以有abstract方法）也可以有非abstract方法。  
