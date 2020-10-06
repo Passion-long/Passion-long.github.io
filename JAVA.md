@@ -9,3 +9,19 @@
 1．可以是可被控制(checked)或不可控制的(unchecked)  
 2．表示一个由程序员导致的错误  
 3．应该在应用程序级被处理  
+  
+* 抽象类和接口的区别是什么？  
+抽象类：  
+  *  和普通类（非abstract类）相比，abstract类中可以有abstract方法（非abstract类中不可以有abstract方法）也可以有非abstract方法。  
+  *  对于abstract类，不能使用new运算符创建该类的对象。
+  
+接口：  
+
+```
+interface Printable {
+  public final static int MAX = 100;
+  public abstract void add();
+  public abstract float sum (float x, float y);
+}
+```
+  *  接口体中包含常量的声明（没有变量）和抽象方法两部分。接口体重只有抽象方法，没有普通的方法。而且接口体中所有的常量的访问权限一定都是public，而且是static常量。所有的抽象方法的访问权限一定都是public。
