@@ -109,6 +109,25 @@ equals
 * Integer实际是对象的引用，当new一个Integer时，实际上是生成一个指针指向此对象；而int则是直接存储数据值。  
 * Integer的默认值是null，int的默认值是0。  
   
-9. 
+9. 内部类和静态内部类区别？  
+内部类：  
+* 成员内部类可访问外部类所有的方法和成员变量。  
+* 不能有静态的方法和成员变量。  
+静态内部类：  
+* 只能访问外部类的静态成员变量和静态方法；不能直接访问外部类的非静态成员，但可以通过new外部类().成员的方式访问。  
+* 静态内部类的非静态成员可访问外部类的静态变量，而不可访问外部类的非静态变量。  
+  
+10. 匿名内部类：
+* 没有类名，没有class关键字，也没有extends和implements等关键字修饰。  
+* 类的定义和对象的实例化同时进行。  
+  
+11. sleep和wait的区别？  
+* sleep是线程中的方法，wait是Object中的方法。  
+* sleep不会释放锁，wait会释放锁。  
+* sleep不依赖于同步器synchronized，wait依赖synchronized关键字。  
+* sleep不需要被唤醒（使用interrupt()方法吵醒休眠中的线程sleep），wait需要notify()或者notigyAll()唤醒。  
+  
+12. 
+
 
 
