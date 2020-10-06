@@ -1,6 +1,7 @@
 # JAVA
 **1. Error和Exception的区别？**  
 首先，所有的异常都是由Throwable继承而来，但在下一层立即分解为两个分支：Error和Exception  
+  
 **Error**  
 * 总是不可控制的(unchecked)  
 * 经常用来用于表示系统错误或低层资源的错误  
@@ -77,4 +78,17 @@ class MyCallable implements Callable {
   }
 }
 ```
-* 线程池
+* 线程池  
+  
+4. 说一下HashMap的实现原理？  
+* HashMap基于Hash算法实现，通过put(key,value)存储，get(key)来获取value。  
+* 当传入key时，HashMap会根据key，调用hash(Object key)方法，计算出hash值，根据hash值保存在Node对象里，Node对象保存在数组里。  
+* 当计算出的值相同时，称之为hash冲突，HashMap的做法是用链表和红黑树存储相同hash值的value。  
+* 当hash冲突的个数：小于等于8使用链表；大于8时，使用红黑树解决链表查询慢的问题。  
+* JDK1.7是基于数组+链表实现，JDK1.8是基于数组+链表+红黑树实现。  
+* JDK1.7是头插法，JDK1.8是尾插法。  
+* 在插入时，1.7先判断是否需要扩容，再插入，1.8先进行插入，插入完再判断是否需要扩容。  
+  
+5. 
+
+
