@@ -1,11 +1,12 @@
 # JAVA
 **1. Error和Exception的区别？**  
 首先，所有的异常都是由Throwable继承而来，但在下一层立即分解为两个分支：Error和Exception  
-  
+
 **Error**  
 * 总是不可控制的(unchecked)  
 * 经常用来用于表示系统错误或低层资源的错误  
-* 如何可能的话，应该在系统级被捕捉  
+* 如何可能的话，应该在系统级被捕捉       
+   
 **Exception**  
 * 可以是可被控制(checked)或不可控制的(unchecked)  
 * 表示一个由程序员导致的错误  
