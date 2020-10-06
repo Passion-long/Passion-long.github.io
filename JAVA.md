@@ -127,7 +127,29 @@ equals
 * sleep不依赖于同步器synchronized，wait依赖synchronized关键字。  
 * sleep不需要被唤醒（使用interrupt()方法吵醒休眠中的线程sleep），wait需要notify()或者notigyAll()唤醒。  
   
-12. 
+12. String,StringBuffer和StringBuilder的区别？  
+* 可变性：String不可变，StringBuffer和StringBuilder可变。  
+* 线程安全：String不可变，因此是线程安全的。StringBuffer是线程安全的，内部使用synchronized进行同步。StringBuilder不是线程安全的。  
+  
+13. Vector与ArrayList的区别？  
+* ArrayList在内存不够时默认是扩展50%+1个，Vector是默认扩展1倍。  
+* Vector属于线程安全级别的，但是大多数情况下不使用Vector，因为线程安全需要更大的系统开销。  
+  
+14. HashMap和Hashtable的区别？  
+* 历史原因：Hashtable继承Dictionary类，HashMap继承自abstractMap。  
+* HashMap允许空的键值对，但最多只有一个空对象，而HashTable不允许。  
+* HashTable同步，而HashMap非同步，效率上比HashTable要高。  
+  
+15. ArrayList和LinkedList的区别？  
+* ArrayList底层的数据结构是数组，支持随机访问，而LinkedList的底层数据结构是链表。不支持随机访问。使用下标访问一个元素，ArrayList的时间复杂度是O(1)，而LinkedList是O(n)。LinkedList是双向量链表。  
+  
+16. Collection与Collections的区别是什么？  
+* Collection是Java集合框架中的基本接口。  
+* Collections是Java集合框架提供的一个工具类，其中包含了大量用于操作和返回集合的静态方法。  
+  
+17. Java中TreeMap是采用红黑树实现的。  
+  
+
 
 
 
