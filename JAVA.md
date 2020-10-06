@@ -96,4 +96,19 @@ class MyCallable implements Callable {
 * 类图  
 * 时序图  
   
-7. 
+7. equals和==的区别？（null==能用）  
+equals  
+* 用来比较两个对象的内容是否相等。  
+==  
+* 对于基本数据类型的变量，==是直接对其值进行比较；  
+* 对于引用数据类型的变量，则是对其内存地址的比较。  
+  
+8. Integer和int的区别？  
+* Integer是int的包装类，int则是java的一种基本数据类型。  
+* Integer变量必须实例化后才能使用，而int变量不需要。  
+* Integer实际是对象的引用，当new一个Integer时，实际上是生成一个指针指向此对象；而int则是直接存储数据值。  
+* Integer的默认值是null，int的默认值是0。  
+  
+9. 
+
+
