@@ -129,14 +129,18 @@ equals
   
 <details>  
 <summary>什么是线程同步？</summary>  
-所谓线程同步就是若干个线程都需要使用一个synchronized修饰的方法，即程序中的若干个线程都需要使用一个方法，而这个方法用synchronized给予了修饰。多个线程调用synchronized方法必须遵循同步机制。
+   
+所谓线程同步就是若干个线程都需要使用一个synchronized修饰的方法，即程序中的若干个线程都需要使用一个方法，而这个方法用synchronized给予了修饰。多个线程调用synchronized方法必须遵循同步机制。  
 线程同步机制：当一个线程A使用synchronized的方法时，其他线程想使用这个synchronized方法时就必须等待，直到线程A使用完该synchronized方法。  
+   
 </details>  
-  
+   
 <details>  
 <summary>什么是线程联合？</summary>  
+   
 一个线程在占有CPU资源期间，可以让其他线程调用join()和本线程联合，比如，线程A希望联合线程B，那么线程A在占有CPU资源期间，可通过执行如下代码来联合线程B。B.join();  
 线程A在占有CPU资源期间一旦联合B线程，那么A线程将立刻中断执行，一直等到它联合的线程B执行完毕，A线程再重新排队等待CPU资源，以便恢复执行。如果A准备联合的B线程已经结束，那么B.join()不会产生任何效果。  
+   
 </details>  
   
 **12. String,StringBuffer和StringBuilder的区别？**  
