@@ -8,7 +8,7 @@
 6. [设计模式.md](https://github.com/Passion-long/Passion-long.github.io/blob/master/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.md)  
 7. [Android.md](https://github.com/Passion-long/Passion-long.github.io/blob/master/Android.md)  
 8. [数据结构与算法.md](https://github.com/Passion-long/Passion-long.github.io/blob/master/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95.md)  
-  
+9. [C++.md](https://github.com/Passion-long/Passion-long.github.io/blob/master/C%2B%2B.md)  
   
   
 * 部分参考：  
