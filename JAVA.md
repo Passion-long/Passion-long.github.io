@@ -123,7 +123,7 @@ equals
   
 **11. sleep和wait的区别？**  
 * sleep是线程中的方法，wait是Object中的方法。  
-* sleep不会释放锁，wait会释放锁。  
+* sleep不会释放<table><tr><td bgcolor=yellow>锁</td></tr></table>，wait会释放锁。  
 * sleep不依赖于同步器synchronized，wait依赖synchronized关键字。  
 * sleep不需要被唤醒（使用interrupt()方法吵醒休眠中的线程sleep），wait需要notify()或者notigyAll()唤醒。  
   
