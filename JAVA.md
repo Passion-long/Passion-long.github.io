@@ -183,8 +183,27 @@ Java提供了一个很方便的Timer类，该类在javax.swing包中。当某些
 * 用super操作被隐藏的成员变量和方法。  
 * 使用super调用父类的构造方法。  
   
-**19. Java中的比较器的用法？**
+**19. Java中Comparable和Comparator接口的区别？**  
+  
+Comparable：  
+* Comparable可以认为是一个内部比较器，实现了Comparable接口。Comparable是排序接口。若一个类实现了Comparable接口，就意味着“该类支持排序”。  
+* 接口中通过int x.compareTo(y)来比较x和y的大小。若返回负数，意味着x比y小；返回零，意味着x等于y；返回正数，意味着x大于y。  
+  
+Comparator：  
+* Comparator可以认为是一个外部比较器，没有实现Comparable接口。我们可以通过“实现Comparator类来新建一个比较器”，然后通过该比较器对类进行排序。  
+* 接口中通过int compare(T o1, T o2)和上面的x.compareTo(y)类似，定义排序规则后返回正数，零和负数分别代表大于，等于和小于。  
+  
+```
+Collections里面的两个sort方法：  
+public static <T extends Comparable<? super T>> void sort(List<T> list) {//内部比较器
+  list.sort((Comparator)null);
+}
 
-
+public static <T> void sort(List<T> list, Comparator<? super T> c) {//外部比较器
+  list.sort(c);
+}
+? super T 表示所有T的超类，只用于参数
+```
+具体代码区别可以参考：[Java中Comparable和Comparator接口区别分析](https://blog.csdn.net/qq_37267015/article/details/77371353)  
 
 
