@@ -143,6 +143,20 @@ equals
    
 </details>  
   
+<details>  
+<summary>什么是计时器线程？</summary>  
+   
+Timer类：  
+Java提供了一个很方便的Timer类，该类在javax.swing包中。当某些操作需要周期性地执行，就可以使用计时器。我们使用Timer类的构造方法Timer(int a, Object b)创建一个计时器，其中的参数a的单位是毫秒，确定计时器每隔a毫秒“振铃”一次，参数b是计时器的监视器。  
+  
+振铃与ActionEvent事件：  
+计时器发生的振铃事件是ActionEvent类型事件。当振铃事件发生时，监视器b就会监视到这个事件，监视器b就回调ActionListener接口中的actionPerformed(ActionEvent e)方法。因此当振铃每隔a毫秒发生一次时，方法actionPerformed(ActionEvent e)就被执行一次。需要特别注意的是，计时器的监视器b必须是组件类（例如，JFrame、JButton等）的子类的实例，否则计时器无法启动。  
+  
+计时器的启动与停止：  
+计时器调用start()方法启动计时器，使用方法stop()停止计时器，使用restart()重新启动计时器。  
+  
+</details>  
+  
 **12. String,StringBuffer和StringBuilder的区别？**  
 * 可变性：String不可变，StringBuffer和StringBuilder可变。  
 * 线程安全：String不可变，因此是线程安全的。StringBuffer是线程安全的，内部使用synchronized进行同步。StringBuilder不是线程安全的。  
