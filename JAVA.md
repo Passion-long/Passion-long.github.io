@@ -126,6 +126,9 @@ equals
 * sleep不会释放锁，wait会释放锁。  
 * sleep不依赖于同步器synchronized，wait依赖synchronized关键字。  
 * sleep不需要被唤醒（使用interrupt()方法吵醒休眠中的线程sleep），wait需要notify()或者notigyAll()唤醒。  
+**什么是关键字synchronized？**  
+* 所谓线程同步就是若干个线程都需要使用一个synchronized修饰的方法，即程序中的若干个线程都需要使用一个方法，而这个方法用synchronized给予了修饰。多个线程调用synchronized方法必须遵循同步机制。  
+* 线程同步机制：当一个线程A使用synchronized的方法时，其他线程想使用这个synchronized方法时就必须等待，直到线程A使用完该synchronized方法。
   
 **12. String,StringBuffer和StringBuilder的区别？**  
 * 可变性：String不可变，StringBuffer和StringBuilder可变。  
