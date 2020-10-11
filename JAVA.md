@@ -213,7 +213,9 @@ public static <T> void sort(List<T> list, Comparator<? super T> c) {//外部比�
 * 上转型对象不能操作子类新增的成员变量；不能调用子类新增的方法。  
 * 上转型对象可以访问子类继承或隐藏的变量，也可以调用子类继承或重写的方法。  
   
-
+**22. [图解LinkedHashMap参考这篇文章](https://www.jianshu.com/p/8f4f58b4b8ab)**  
+  
+  
 
 
 
