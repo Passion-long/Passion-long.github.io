@@ -166,9 +166,12 @@ Java提供了一个很方便的Timer类，该类在javax.swing包中。当某些
 * Vector属于线程安全级别的，但是大多数情况下不使用Vector，因为线程安全需要更大的系统开销。  
   
 **14. HashMap和Hashtable的区别？**  
-* 历史原因：Hashtable继承Dictionary类，HashMap继承自abstractMap。  
-* HashMap允许空的键值对，但最多只有一个空对象，而HashTable不允许。  
-* HashTable同步，而HashMap非同步，效率上比HashTable要高。  
+相同点：  
+都实现了Map接口  
+不同点：  
+Hashtable继承Dictionary类，HashMap继承自abstractMap。  
+HashMap允许空的键值对，但最多只有一个空对象，而HashTable不允许空的键值对。  
+HashTable同步，而HashMap非同步，效率上比HashTable要高。  
   
 **15. ArrayList和LinkedList的区别？**  
 * ArrayList底层的数据结构是数组，支持随机访问，而LinkedList的底层数据结构是链表。不支持随机访问。使用下标访问一个元素，ArrayList的时间复杂度是O(1)，而LinkedList是O(n)。LinkedList是双向量链表。  
@@ -217,9 +220,80 @@ public static <T> void sort(List<T> list, Comparator<? super T> c) {//外部比�
 **[图解HashMap原理参考这篇文章](https://www.jianshu.com/p/dde9b12343c1)**  
 **[图解LinkedHashMap参考这篇文章](https://www.jianshu.com/p/8f4f58b4b8ab)**  
 
-
+**23. Java三大注解是什么？**  
+1.Java三大注解分别是@Override @Deprecated @Suppresswarnings
+2.@Override 注解表名子类中覆盖了超类中的某个方法，如果写错了覆盖形式，编译器会报错
+3.@Deprecated 表明不希望别人在以后使用这个类，方法，变量等等
+4.@Suppresswarnings 达到抑制编译器产生警告的目的，但是不建议使用，因为后期编码人员看不懂编译器提示的警告，不能更好的选择更好的类去完成任务
   
+**23. 下面语句都是创建数组的正确语句：**  
+float f[][] = new float[6][6];  
+float []f[] = new float[6][6];  
+float [][]f = new float[6][6];  
+float [][]f = new float[6][];  
   
-
-
-
+**24. Java程序初始化顺序：**  
+父类的静态代码块  
+子类的静态代码块  
+父类的普通代码块  
+父类的构造方法  
+子类的普通代码块  
+子类的构造方法  
+例子：  
+```
+class A {
+    public A() {
+        System.out.println("class A");
+    }
+    { System.out.println("I'm A class"); } 
+    static { System.out.println("class A static"); }
+}
+public class B extends A {
+    public B() {
+        System.out.println("class B");
+    }
+    { System.out.println("I'm B class"); }
+    static { System.out.println("class B static"); }
+     
+    public static void main(String[] args) { 
+      new B(); 
+    }
+}
+```  
+运行下面代码，输出的结果是:  
+class A static  
+class B static  
+I'm A class  
+class A  
+I'm B class  
+class B  
+  
+**25. java关键字都是小写。null是关键字，NULL不是关键字，java区分大小写。**  
+  
+**26. 通过JDBC访问数据库包含下面4步：**  
+(1). 载入JDBC驱动程序  
+(2). 建立连接  
+(3). 执行查询或更新  
+(4). 关闭连接  
+  
+**27. 线程切换状态：**
+![Thread](https://github.com/Passion-long/Passion-long.github.io/blob/master/Figure/Thread.png)  
+  
+**28. 同步代码块中的锁：**  
+```
+public class Test {
+    private synchronized void a() {
+    }
+    private void b() {
+        synchronized (this) {
+        }
+    }
+    private synchronized static void c() {
+    }
+    private void d() {
+        synchronized (Test.class) {
+        }
+    }
+}
+```
+方法a为同步方法，方法b里面的是同步块，同步方法使用的锁是固有对象this，同步块使用的锁可以是任意对象，但是方法b里面的同步块使用的锁是对象this，所以方法a和方法b锁住的是同一个对象。方法 c为静态同步方法，使用的锁是该类的字节码文件，也就是Test.class。方法d里面的也是同步块，只不过使用的锁是Test.class，所以方法c和方法d锁住的是同一个对象。
