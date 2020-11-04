@@ -114,6 +114,18 @@ JS声明函数:
 JS的文档从上到下加载，有一个文档加载顺序。  
 
 
+# JQuery  
+JavaScript的库。  
+JQuery的作用:
+
+​	1. 写更少的代码,做更多的事情: write Less ,Do more  
+  
+	2. 将我们页面的JS代码和HTML页面代码进行分离  
+
+为什么学习JQuery:
+
+​	提高我们的工作效率
+
 
 
 
