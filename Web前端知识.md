@@ -87,19 +87,19 @@ ID选择器：
 
 JS声明变量:
 
-​	var 变量的名称 = 变量的值
+var 变量的名称 = 变量的值
 
 JS声明函数:
 
-​	var 函数的名称 = function(){	
+var 函数的名称 = function(){	
 
-​	}
+}
 
-​	
 
-​	function 函数的名称(){
 
-​	}
+function 函数的名称(){
+
+}
 
 
 #### JS的开发步骤
@@ -118,15 +118,139 @@ JS的文档从上到下加载，有一个文档加载顺序。
 JavaScript的库。  
 JQuery的作用:
 
-​	1. 写更少的代码,做更多的事情: write Less ,Do more  
+1. 写更少的代码,做更多的事情: write Less ,Do more  
   
-	2. 将我们页面的JS代码和HTML页面代码进行分离  
+2. 将我们页面的JS代码和HTML页面代码进行分离  
 
 为什么学习JQuery:
 
-​	提高我们的工作效率
+提高我们的工作效率
+
+基本选择器:
+
+​	ID选择器: #ID名称
+
+​	类选择器: .类名
+
+​	元素选择器: 元素的名称
+
+​	通配符选择器:  *  找出页面上所有元素
+
+​	选择器分组: 选择器1,选择器2     [选择器1 , 选择器2]  
+
+层级选择器:
+
+​	后代选择器: 选择器1 选择器2  找出来的选择器1 下面的所有选择器2  子孙
+
+​	子元素选择器: 选择器1 > 选择器2   找出来的是所有的子节点  儿子
+
+​	相邻兄弟选择器: 选择器1+选择器2    找出来的紧挨着自己的弟弟
+
+​	兄弟选择器:   选择器1~选择器2    找出所有的弟弟
+
+​		(找出所有兄弟:   $("div").siblings()    )
+
+属性选择器:
+
+```html
+选择器 div
+选择器[title]
+选择器[title='test']
+选择器[title='test'][style]
+```
 
 
+
+基本的过滤器:    选择器:过滤器   $("div:first")
+
+​	:first : 找出第一个元素
+
+​	:last  找出最后一个元素
+
+​	:even   找出偶数索引
+
+​	:odd   找出奇数
+
+​	:gt(index)   greater-than大于
+
+​	:lt(index)    小于
+
+​	:eq(index)  等于
+
+表单选择器:
+
+​	:input  找出所有的输入项,  textarea select button
+
+​	:password
+
+​	:text
+
+​	:radio
+
+表单对象属性的过滤器
+
+​	:selected
+
+​	:checked
+
+
+
+常用函数:
+
+​	属性prop()    properties
+
+​		如果传入一个参数  就是获取
+
+​	prop("src","../img/1.jpg");  
+
+​		设置图片路径
+
+​	attr : 操作一些自定义的属性  <img  abc='123' />
+
+​	prop: 通常是用来操作元素固有属性的 ,建议大家使用prop来操作属性
+
+
+
+​	css() ; 修改css样式
+
+​	addClass()  : 添加一个class样式
+
+​	removeClass() : 移除
+
+​	
+
+​	blur : 绑定失去焦点
+
+​	focus: 绑定获得焦点事件
+
+​	click:
+
+​	dblclick
+
+​	change
+
+​	
+
+​	append    :  给自己添加儿子
+
+​	appendTo :  把自己添加到别人家
+
+​	prepend :  在自己子节点最前面添加子节点
+
+​	after  : 在自己后面添加一个兄弟
+
+​	before: 在自己前面添加一个兄弟
+
+​	
+
+​	$("数组对象").each(function(index,data))
+
+​	$.each(arr,function(index,data))
+
+​	
+
+
+# BootStrap  
 
 
 
