@@ -247,16 +247,51 @@ JQuery的作用:
 
 ​	$.each(arr,function(index,data))
 
-​	
+几个经常忘记的东西：  
+​	form 标签: 表单标签,主要是用来向服务器提交数据
 
+HTML的块标签:
+
+​	div标签: 默认占一行,自动换行
+
+​	span标签:  内容显示在同一行
+
+## JSON格式
+
+  ​	JSON对象
+
+  ```json
+  { key1:value}   
+  {"username":"zhangsan","password":"123"}
+  ```
+
+  ​	JSON数组
+
+  ```json
+  [{ key1:value},{   key1:value},{ key1:value}]
+  ```
+
+  
 
 # BootStrap  
 
 
 
+- BootStrap有什么作用
+
+  - 复制粘贴, 能够提高开发人员的工作效率
 
 
 
+- 什么是响应式页面
+
+
+  - 适应不同的分辨率显示不同样式,提高用户的体验
+
+
+- BootStrap的中文网
+  - http://www.bootcss.com
+  
 
 
 
