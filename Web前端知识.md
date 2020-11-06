@@ -280,7 +280,7 @@ HTML的块标签:
 - BootStrap有什么作用
 
   - 复制粘贴, 能够提高开发人员的工作效率
-
+Bootstrap 是最受欢迎的 HTML、CSS 和 JS 框架，用于开发响应式布局、移动设备优先的 WEB 项目。
 
 
 - 什么是响应式页面
@@ -292,7 +292,43 @@ HTML的块标签:
 - BootStrap的中文网
   - http://www.bootcss.com
   
+BootStrap是移动设备优先的。  
 
+- BootStrap的布局容器
+
+`.container` 类用于固定宽度并支持响应式布局的容器。
+
+```
+<div class="container">
+  ...
+</div>
+```
+
+`.container-fluid` 类用于 100% 宽度，占据全部视口（viewport）的容器。
+
+```
+<div class="container-fluid">
+  ...
+</div>
+```
+
+
+常见面试题:  
+请介绍一下BootStrap:  
+1. 轻量级开发响应式页面的框架;  
+2. - BootStrap结构
+  - 全局CSS
+    - bootStrap中已经定义好了一套CSS的样式表
+  - 组件
+    - BootStrap定义的一套按钮,导航条等组件
+  - JS插件
+    - BootStrap定义了一套JS的插件,这些插件已经默认实现了很多种效果 
+3. 栅格系统:将页面的宽度分为12个等份  
+4. col-xs-*:手机屏幕  
+5. col-sm-*:平板  
+6. col-md-*:PC电脑  
+7. col-lg-*:超大屏幕  
+  
 
 
 
