@@ -464,3 +464,46 @@ class Car {
 * D:调用不同
 	* 静态变量可以通过类名调用，也可以通过对象调用
 	* 成员变量只能通过对 象名调用
+### 07.13_面向对象(main方法的格式详细解释)(了解)
+* A:格式
+	* public static void main(String[] args) {}
+* B:针对格式的解释
+	* public 被jvm调用，访问权限足够大。
+	* static 被jvm调用，不用创建对象，直接类名访问
+	* void被jvm调用，不需要给jvm返回值
+	* main 一个通用的名称，虽然不是关键字，但是被jvm识别
+	* String[] args 以前用于接收键盘录入的
+* C:演示案例
+	* 通过args接收键盘例如数据
+```
+class Demo3_Main {
+	public static void main(String[] args) {			
+		System.out.println(args.length);
+		for (int i = 0;i < args.length ;i++ ) {
+			System.out.println(args[i]);
+		}
+	}
+}
+
+cmd输入:java Demo3_Main haha xixi hehe
+cmd输出:
+3
+haha
+xixi
+hehe
+```
+### 07.14_面向对象(工具类中使用静态)(了解)
+* A:制作一个工具类
+	* ArrayTool
+	* 1,获取最大值
+	* 2,数组的遍历
+	* 3,数组的反转
+* 如果一个类中所有的方法都是静态的,需要再多做一步,**私有构造方法**,目的是不让其他类创建本类对象,直接用类名.调用即可
+### 07.15_面向对象(说明书的制作过程)(了解)
+* A:对工具类加入文档注释
+* B:通过javadoc命令生成说明书
+	* @author(提取作者内容)
+	* @version(提取版本内容)
+	* javadoc -d 指定的文件目录 -author -version ArrayTool.java  (类必须是public的)
+	* @param 参数名称//形式参数的变量名称
+	* @return 函数运行完返回的数据
