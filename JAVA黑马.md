@@ -507,3 +507,364 @@ hehe
 	* javadoc -d 指定的文件目录 -author -version ArrayTool.java  (类必须是public的)
 	* @param 参数名称//形式参数的变量名称
 	* @return 函数运行完返回的数据
+### 08.01_面向对象(代码块的概述和分类)(了解)(面试的时候会问,开发不用或者很少用)
+* A:代码块概述
+	* 在Java中，使用{}括起来的代码被称为代码块。
+* B:代码块分类
+	* 根据其位置和声明的不同，可以分为局部代码块，构造代码块，静态代码块，同步代码块(多线程讲解)。
+* C:常见代码块的应用
+	* a:局部代码块 
+		* 在方法中出现；限定变量生命周期，及早释放，提高内存利用率
+	* b:构造代码块 **(初始化块)**
+		* 在类中方法外出现；多个构造方法方法中相同的代码存放到一起，每次调用构造都执行，并且在构造方法前执行
+	* c:静态代码块 
+		* 在类中方法外出现，并加上static修饰；用于给类进行初始化，在加载的时候就执行，并且只执行一次。
+		* 一般用于加载驱动
+		* 静态代码块优先于主方法执行
+###08.02_面向对象(代码块的面试题)(掌握)
+* A:看程序写结果
+* 
+		class Student {
+			static {//只执行一次
+				System.out.println("Student 静态代码块");
+			}
+			
+			{
+				System.out.println("Student 构造代码块");
+			}
+			
+			public Student() {
+				System.out.println("Student 构造方法");
+			}
+		}
+	
+		class Demo2_Student {
+			static {
+				System.out.println("Demo2_Student静态代码块");
+			}
+			
+			public static void main(String[] args) {
+				System.out.println("我是main方法");
+				
+				Student s1 = new Student();
+				Student s2 = new Student();
+			}
+		}
+```
+输出结果:
+Demo2_Student静态代码块
+我是main方法
+Student 静态代码块
+Student 构造代码块
+Student 构造方法
+Student 构造代码块
+Student 构造方法
+```
+### 08.04_面向对象(继承的好处和弊端)(掌握)
+* A:继承的好处
+	* a:提高了代码的复用性
+	* b:提高了代码的维护性
+	* c:让类与类之间产生了关系，是多态的前提
+* B:继承的弊端
+	* 类的耦合性增强了。
+	
+	* 开发的原则：高内聚，低耦合。
+	* 耦合：类与类的关系
+	* 内聚：就是自己完成某件事情的能力
+### 08.05_面向对象(Java中类的继承特点)(掌握)
+* A:Java中类的继承特点
+	* a:Java只支持单继承，不支持多继承。(一个儿子只能有一个爹)(多继承有安全隐患)
+		* 有些语言是支持多继承，格式：extends 类1,类2,...
+	* b:Java支持多层继承(继承体系)
+* B:案例演示
+	* Java中类的继承特点
+		* 如果想用这个体系的所有功能用最底层的类创建对象
+		* 如果想看这个体系的共性功能,看最顶层的类 
+### 08.06_面向对象(继承的注意事项和什么时候使用继承)(掌握)
+* A:继承的注意事项
+	* a:子类只能继承父类所有非私有的成员(成员方法和成员变量)
+	* b:子类不能继承父类的构造方法，但是可以通过super(马上讲)关键字去访问父类构造方法。
+	* c:不要为了部分功能而去继承
+	* 项目经理 姓名 工号 工资 奖金
+	* 程序员	姓名 工号 工资
+* B:什么时候使用继承
+	* 继承其实体现的是一种关系："is a"。
+		Person
+			Student
+			Teacher
+		水果
+			苹果
+			香蕉
+			橘子
+			
+	采用假设法。
+		如果有两个类A,B。只有他们符合A是B的一种，或者B是A的一种，就可以考虑使用继承。
+### 08.07_面向对象(继承中成员变量的关系)(掌握)
+* A:案例演示
+	* a:不同名的变量
+	* b:同名的变量(就近原则)
+		* 子父类出现同名的变量只是在讲课中举例子有,在开发中是不会出现这种情况的
+		* 子类继承父类就是为了使用父类的成员,那么如果定义了同名的成员变量没有意义了
+### 08.08_面向对象(this和super的区别和应用)(掌握)
+* A:this和super都代表什么
+	* this:代表当前对象的引用,谁来调用我,我就代表谁
+	* super:代表当前对象父类的引用
+* B:this和super的使用区别
+	* a:调用成员变量
+		* this.成员变量 调用本类的成员变量,也可以调用父类的成员变量
+		* super.成员变量 调用父类的成员变量
+	* b:调用构造方法
+		* this(...)	调用本类的构造方法
+		* super(...)	调用父类的构造方法
+	* c:调用成员方法
+		* this.成员方法 调用本类的成员方法,也可以调用父类的方法
+		* super.成员方法 调用父类的成员方法
+### 08.09_面向对象(继承中构造方法的关系)(掌握)
+* A:案例演示
+	* 子类中所有的构造方法默认都会访问父类中空参数的构造方法
+* B:为什么呢?
+	* 因为子类会继承父类中的数据，可能还会使用父类的数据。
+	* 所以，子类初始化之前，一定要先完成父类数据的初始化。
+	
+	* 其实：
+		* 每一个构造方法的第一条语句默认都是：super() Object类最顶层的父类。
+### 08.10_面向对象(继承中构造方法的注意事项)(掌握)
+* A:案例演示
+	* 父类没有无参构造方法,子类怎么办?
+	* super解决(调用父类的构造方法)
+	* this解决(调用子类的构造方法)
+* B:注意事项
+	* super(…)或者this(….)必须出现在构造方法的第一条语句上
+### 08.11_面向对象(继承中的面试题)(掌握)
+* 这个题很经典
+```
+class Test2_Extends {
+	public static void main(String[] args) {
+		Zi z = new Zi();
+	}
+	/*
+	1,jvm调用了main方法,main进栈
+	2,遇到Zi z = new Zi();会先将Fu.class和Zi.class分别加载进内存,再创建对象,当Fu.class加载进内存
+	父类的静态代码块会随着Fu.class一起加载,当Zi.class加载进内存,子类的静态代码块会随着Zi.class一起加载
+	第一个输出,静态代码块Fu,第二个输出静态代码块Zi
+	3,走Zi类的构造方法,因为java中是分层初始化的,先初始化父类,再初始化子类,所以先走的父类构造,但是在执行
+	父类构造时,发现父类有构造代码块,构造代码块是优先于构造方法执行的所以
+	第三个输出构造代码块Fu,第四个输出构造方法Fu
+	4,Fu类初始化结束,子类初始化,第五个输出的是构造代码块Zi,构造方法Zi
+	*/
+}
+class Fu {
+	static {
+		System.out.println("静态代码块Fu");//输出顺序:1
+	}
+
+	{
+		System.out.println("构造代码块Fu");//3
+	}
+
+	public Fu() {
+		System.out.println("构造方法Fu");//4
+	}
+}
+
+class Zi extends Fu {
+	static {
+		System.out.println("静态代码块Zi");//2
+	}
+
+	{
+		System.out.println("构造代码块Zi");//5
+	}
+
+	public Zi() {
+		System.out.println("构造方法Zi");//6
+	}
+}
+```
+### 08.12_面向对象(继承中成员方法关系)(掌握)
+* A:案例演示
+	* a:不同名的方法
+	* b:同名的方法(叫做重写,也可以使用super调用父类同名的成员方法)
+
+### 08.13_面向对象(方法重写概述及其应用)(掌握)
+* A:什么是方法重写
+	* 重写:子父类出现了一模一样的方法(注意:返回值类型可以是子父类,这个我们学完面向对象讲) 
+* B:方法重写的应用：
+	* 当子类需要父类的功能，而功能主体子类有自己特有内容时，可以重写父类中的方法。这样，即沿袭了父类的功能，又定义了子类特有的内容。
+* C:Java中的类名可以是中文的,因为Java中.class文件编码是Unicode编码,Unicode囊括了世界上所有的语言.
+* D:案例演示
+	* a:定义一个手机类。
+```
+class Demo7_Phone {
+	public static void main(String[] args) {
+		Ios8 i = new Ios8();
+		i.siri();
+		i.call();
+	}
+}
+class Ios7 {
+	public void call() {
+		System.out.println("打电话");
+	}
+
+	public void siri() {
+		System.out.println("speak English");
+	}
+}
+class Ios8 extends Ios7 {
+	public void siri() {
+		
+		System.out.println("说中文");
+		super.siri();//注意:这里不是构造方法,super可以放在第二句;但是在构造方法里面,super必须放在第一句.
+	}
+}
+输出结果:
+说中文
+speak English
+打电话
+```
+### 08.14_面向对象(方法重写的注意事项)(掌握)
+* A:方法重写注意事项
+	* a:父类中私有方法不能被重写
+		* 因为父类私有方法子类根本就无法继承
+	* b:子类重写父类方法时，访问权限不能更低
+		* 最好就一致
+	* c:父类静态方法，子类也必须通过静态方法进行重写
+		* 其实这个算不上方法重写，但是现象确实如此，至于为什么算不上方法重写，多态中我会讲解(静态只能覆盖静态)
+		
+	* 子类重写父类方法的时候，最好声明一模一样。
+* B:案例演示
+	* 方法重写注意事项
+
+### 08.15_面向对象(方法重写的面试题)(掌握)
+* A:方法重写的面试题
+	* Override和Overload的区别?Overload能改变返回值类型吗?
+	* overload可以改变返回值类型,只看参数列表
+	* 方法重写：子类中出现了和父类中方法声明一模一样的方法。与返回值类型有关,返回值是一致(或者是子父类)的
+	
+	* 方法重载：本类中出现的方法名一样，参数列表不同的方法。与返回值类型无关。
+
+	* 子类对象调用方法的时候：
+		* 先找子类本身，再找父类。
+### 08.19_面向对象(final关键字修饰类,方法以及变量的特点)(掌握)
+* A:final概述
+	* final是最终的 
+* B:final修饰特点
+	* 修饰类，类不能被继承
+	* 修饰变量，变量就变成了常量，只能被赋值一次
+	* 修饰方法，方法不能被重写
+* C:案例演示
+	* final修饰特点
+* D:常量命名规范,如果是一个单词,所有字母大写,如果是多个单词,每个单词都大写,中间用下划线隔开.
+* E:final修饰变量叫做常量,一般会与public static共用
+### 08.20_面向对象(final关键字修饰局部变量)(掌握)
+* A:案例演示
+	* 方法内部或者方法声明上都演示一下(了解)
+
+	* 基本类型，是值不能被改变
+	* 引用类型，是地址值不能被改变,对象中的属性可以改变
+### 08.21_面向对象(final修饰变量的初始化时机)(掌握)
+* A:final修饰变量的初始化时机
+	* 成员变量的默认初始化值是无效值
+	* 在对象构造完毕前即可
+```
+class Demo2_Final {
+	public static void main(String[] args) {
+		final int num = 10;
+		//num = 20;
+		System.out.println(num);
+
+		final Person p = new Person("张三",23);
+		//p = new Person("李四",24);
+		p.setName("李四");
+		p.setAge(24);
+
+		System.out.println(p.getName() + "..." + p.getAge());
+
+		method(10);
+		method(20);
+	}
+
+	public static void method(final int x) {
+		System.out.println(x);
+	}
+}
+```
+### 09.01_面向对象(多态的概述及其代码体现)
+* A:多态(polymorphic)概述
+	* 事物存在的多种形态 
+* B:多态前提
+	* a:要有继承关系。
+	* b:要有方法重写。
+	* c:要有父类引用指向子类对象。
+### 09.02_面向对象(多态中的成员访问特点)
+```
+class Demo2_Polymorphic {
+	public static void main(String[] args) {
+		/*Father f = new Son();					//父类引用指向子类对象
+		System.out.println(f.num);//输出10
+
+		Son s = new Son();
+		System.out.println(s.num);//输出20*/
+
+		Father f = new Son();
+		//f.print();//输出son
+		f.method();//输出father static method		      //相当于是Father.method()
+	}
+}
+/*
+成员变量
+编译看左边(父类),运行看左边(父类);"编译看左边的意思就是,如果左边没有对应的变量或者方法,则编译不通过,就会报错."
+成员方法
+编译看左边(父类)，运行看右边(子类)。动态绑定
+静态方法
+编译看左边(父类)，运行看左边(父类)。
+(静态和类相关，算不上重写，所以，访问还是左边的)
+只有非静态的成员方法,编译看左边,运行看右边 
+*/
+class Father {
+	int num = 10;
+	public void print() {
+		System.out.println("father");
+	}
+
+	public static void method() {
+		System.out.println("father static method");
+	}
+}
+
+class Son extends Father {
+	int num = 20;
+
+	public void print() {
+		System.out.println("son");
+	}
+
+	public static void method() {
+		System.out.println("son static method");
+	}
+}
+```
+* 多态中的成员变量:
+![多态中的成员变量](https://github.com/Passion-long/Passion-long.github.io/blob/master/Figure/Member%20variables%20in%20polymorphism.png)  
+* 多态中的成员方法:
+![多态中的成员方法](https://github.com/Passion-long/Passion-long.github.io/blob/master/Figure/Member%20methods%20in%20polymorphism.png)  
+
+### 09.07_面向对象(多态的好处和弊端)
+* A:多态的好处
+	* a:提高了代码的维护性(继承保证)
+	* b:提高了代码的扩展性(由多态保证)
+* B:案例演示
+	* 多态的好处
+	* 可以当作形式参数,可以接收任意子类对象
+* C:多态的弊端
+	* **不能使用子类的特有属性和行为。**
+* D:案例演示
+	method(Animal a)
+	method(Cat c)
+* //Animal a = new Cat();		开发的时候很少在创建对象的时候用父类引用指向子类对象,直接创建子类对象更方便,可以使用子类中的特有属性和行为,当做参数的时候用多态最好,因为扩展性强.
+
+
+
+
+
