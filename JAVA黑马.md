@@ -1105,3 +1105,204 @@ class Demo extends Object implements InterA,InterB {		//这样写可以，implem
 * C:设计理念区别
 	* 抽象类 被继承体现的是：”is a”的关系。抽象类中定义的是该继承体系的**共性功能。**
 	* 接口 被实现体现的是：”like a”的关系。接口中定义的是该继承体系的**扩展功能。**
+### 10.05_面向对象(import关键字的概述和使用)(掌握)
+* A:案例演示
+	* 为什么要有import
+		* 其实就是让有包的类对调用者可见,不用写全类名了 
+* B:导包格式
+	* import 包名;
+	* 注意：
+	* 这种方式导入是到类的名称。
+	* 虽然可以最后写*，但是不建议。
+* C:package,import,class有没有顺序关系(面试题)
+	* 有，先是package，后是import，最后是class。
+### 10.06_面向对象(四种权限修饰符的测试)(掌握)
+* A:案例演示
+	* 四种权限修饰符
+* B:结论
+```
+* 
+				本类	 同一个包下(子类和无关类)	不同包下(子类)	不同包下(无关类)
+		private 	Y		
+		默认	        Y	        Y
+		protected	Y		Y			Y
+		public		Y		Y			Y				Y
+```
+### 10.08_面向对象(内部类概述和访问特点)(了解)
+* A:内部类概述
+* B:内部类访问特点
+	* a:内部类可以直接访问外部类的成员，包括私有。
+	* b:外部类要访问内部类的成员，必须创建对象。
+	* 外部类名.内部类名 对象名 = 外部类对象.内部类对象;
+* C:案例演示
+	* 内部类极其访问特点
+```
+class Demo1_InnerClass {
+	public static void main(String[] args) {
+		//外部类名.内部类名 = 外部类对象.内部类对象
+		Outer.Inner oi = new Outer().new Inner();			//创建内部类对象
+		oi.method();
+	}
+}
+
+class Outer {
+	private int num = 10;
+	class Inner {
+		public void method() {
+			System.out.println(num);
+		}
+	}
+}
+```
+### 10.11_面向对象(成员内部类的面试题)(掌握)
+class Test1_InnerClass {
+	public static void main(String[] args) {
+		Outer.Inner oi = new Outer().new Inner();
+		oi.show();
+	}
+}
+//要求：使用已知的变量，在控制台输出30，20，10。
+//内部类之所以能获取到外部类的成员,是因为他能获取到外部类的引用外部类名.this
+class Outer {
+	public int num = 10;
+	class Inner {
+		public int num = 20;
+		public void show() {
+			int num = 30;
+			System.out.println(num);
+			System.out.println(this.num);
+			//System.out.println(new Outer().num); //使用对象来访问成员变量
+			System.out.println(Outer.this.num);
+		}
+	}
+}
+### 10.12_面向对象(局部内部类访问局部变量的问题)(掌握)
+* A:案例演示
+	* 局部内部类访问局部变量必须用final修饰
+	* 局部内部类在访问他所在方法中的局部变量必须用final修饰,为什么?
+		因为当调用这个方法时,局部变量如果没有用final修饰,他的生命周期和方法的生命周期是一样的,当方法弹栈,这个局部变量也会消失,那么如果局部内部类对象还没有马上消失想用这个局部变量,就没有了,如果用final修饰会在类加载的时候进入常量池,即使方法弹栈,常量池的常量还在,也可以继续使用
+
+		但是jdk1.8取消了这个事情,所以我认为这是个bug,虽然取消,如果在书写代码时候,没有手动添加,系统底层也会默给你final
+```
+class Demo1_InnerClass {
+	public static void main(String[] args) {
+		Outer o = new Outer();
+		o.method();
+	}
+}
+//局部内部类
+class Outer {
+	public void method() {
+		int num = 10; //Demo1_InnerClass.java:13: 错误: 从内部类中访问本地变量num; 需要被声明为最终类型
+		class Inner {
+			public void print() {
+				System.out.println(num);
+			}
+		}
+
+		Inner i = new Inner();
+		i.print();
+	}
+
+	/*public void run() {
+		Inner i = new Inner();				//局部内部类,只能在其所在的方法中访问
+		i.print();
+	}*/
+}
+```
+### 10.13_面向对象(匿名内部类的格式和理解)
+* A:匿名内部类
+	* 就是内部类的简化写法。
+* B:前提：存在一个类或者接口
+	* 这里的类可以是具体类也可以是抽象类。
+* C:格式：
+* 
+		new 类名或者接口名(){
+			重写方法;
+		}
+* D:本质是什么呢?
+	* 是一个继承了该类或者实现了该接口的子类匿名对象。
+* E:案例演示
+	* 按照要求来一个匿名内部类
+```
+class Demo1_NoNameInnerClass {
+	public static void main(String[] args) {
+		Outer o = new Outer();
+		o.method();
+	}
+}
+
+interface Inter {
+	public void print();
+}
+
+class Outer {
+	class Inner implements Inter {
+		public void print() {
+			System.out.println("print");
+		}
+	}
+
+	public void method(){
+		//Inner i = new Inner();
+		//i.print();
+		//new Inner().print();
+		//Inter i = new Inner();			//父类引用指向子类对象
+		
+		new Inter() {						//实现Inter接口
+			public void print() {			//重写抽象方法
+				System.out.println("print");
+			}
+		}.print();
+	}
+}
+```
+### 10.14_面向对象(匿名内部类重写多个方法调用)
+* A:案例演示
+	* 匿名内部类的方法调用
+```
+class Demo2_NoNameInnerClass {
+	public static void main(String[] args) {
+		Outer o = new Outer();
+		o.method();
+	}
+}
+
+interface Inter {
+	public void show1();
+	public void show2();
+}
+//匿名内部类只针对重写一个方法时候使用
+class Outer {
+	public void method() {
+		Inter i = new Inter(){
+			public void show1() {
+				System.out.println("show1");
+			}
+
+			public void show2() {
+				System.out.println("show2");
+			}
+
+			/*public void show3() {
+				System.out.println("show3");
+			}*/
+		};
+
+		i.show1();
+		i.show2();
+		//i.show3();						//匿名内部类是不能向下转型的,因为没有子类类名
+	}
+}
+```
+
+### 10.16_面向对象(匿名内部类的面试题)
+* A:面试题
+```
+//
+```
+
+
+
+
+
