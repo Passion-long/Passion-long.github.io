@@ -1299,10 +1299,137 @@ class Outer {
 ### 10.16_面向对象(匿名内部类的面试题)
 * A:面试题
 ```
-//
+// abstract和static不能一块用
+class Test2_NoNameInnerClass {
+	public static void main (String[] args) {
+		//Outer.method().show();// 链式编程，每次调用方法后还能继续调用方法，证明调用方法返回的是对象。
+		Inter i = Outer.method();
+		i.show();
+	}
+}
+//按照要求，补齐代码
+interface Inter {
+	void show();
+}
+
+class Outer {
+	//补齐代码
+	public static Inter method () {
+		return new Inter() {
+			@java.lang.Override
+			public void show() {
+				System.out.println("HelloWorld");
+			}
+		}
+	}
+}
+//要求在控制台输出代码
 ```
+### 11.05_Java开发工具(Eclipse中内容辅助键的使用)(掌握)
+* A:Alt+/ 起提示作用
+* B:main+alt+/,syso+alt+/,给出其他提示
+* C:补充输出语句,选中需要输出的部分,alt+/选择最后一项即可
+* C:定义自己的alt + /
+	* windows--perference-Java-Editor-Templates--New
+### 11.06_Java开发工具(Eclipse中快捷键的使用)(掌握)
+* A:新建 ctrl + n
+* B:格式化  ctrl+shift+f
+* C:导入包  ctrl+shift+o 
+* D:注释  ctrl+/,ctrl+shift+/,ctrl+shift+\
+* E:代码上下移动 选中代码alt+上/下箭头
+* F:查看源码  选中类名(F3或者Ctrl+鼠标点击)
+* G:查找具体的类 ctrl + shift + t
+* H:查找具体类的具体方法 ctrl + o
+* I:给建议 ctrl+1,根据右边生成左边的数据类型,生成方法
+* J:删除代码 ctrl + d
+* K:抽取方法alt + shift + m 
+* L:改名alt + shift + r 
+* M:向下复制一行Ctrl + alt + 下键
 
+### 11.07_Java开发工具(Eclipse中如何提高开发效率)(掌握)
+* alt + shift + s
+* A:自动生成构造方法
+* B:自动生成get/set方法
+```
+package com.heima.bean;
 
+public class Person extends Object{
 
+	private String name;
+	private int age;
 
+	public Person() {   					//alt + shift + s 再 + c 生成空参构造
+		super();
+	}
 
+	public Person(String name, int age) {  	//alt + shift + s 再 + o 根据本地字段(成员变量)生成有参构造
+		super();
+		this.name = name;
+		this.age = age;
+	}
+
+	public String getName() {				//alt + shift + s 再 + r 生成get和set方法
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+}
+
+```
+### 11.17_常见对象(Object类的getClass()方法)(在反射的时候掌握)
+* A:案例演示
+	* public final Class getClass()
+	* a:返回此 Object 的运行时类。
+	* b:可以通过Class类中的一个方法，获取对象的真实类的全名称。	
+		* public String getName()
+```
+package com.heima.object;
+
+import com.heima.bean.Student;
+
+public class Demo2_GetClass {
+
+	public static void main(String[] args) {
+		Student s = new Student("张三", 23);
+		// Class clazz = new Class();
+
+		Class clazz = s.getClass();//获取该对象的字节码文件
+		String name = clazz.getName();//获取类的名称（反射的时候还要详细讲这块）
+		System.out.println(name);//输出：com.heima.bean.Student
+	}
+}
+```
+### 11.18_常见对象(Object类的toString()方法)(掌握)
+* A:案例演示
+	* public String toString()
+	* a:返回该对象的字符串表示。
+* 
+		
+		public Stirng toString() {
+			return name + "," + age;
+		}
+	* b:它的值等于： 
+		* getClass().getName() + "@" + Integer.toHexString(hashCode()) 
+	* c:由于默认情况下的数据对我们来说没有意义，一般建议重写该方法。
+* B:最终版
+	* 自动生成
+* C:如果直接打印对象的引用，会默认调用toString方法
+### 11.19_常见对象(Object类的equals()方法)(掌握)
+* A:案例演示
+	* a:指示其他某个对象是否与此对象“相等”。 
+	* b:默认情况下比较的是对象的引用是否相同。
+	* c:由于比较对象的引用没有意义，一般建议重写该方法。因为在开发中我们通常比较的是对象中的属性值，我们认为 相同属性是同一个对象，这样我们就需要重写equals方法。
+### 11.20_常见对象(==号和equals方法的区别)(掌握)
+* ==是一个比较运算符号,既可以比较基本数据类型,也可以比较引用数据类型,基本数据类型比较的是值,引用数据类型比较的是地址值
+* equals方法是一个方法,只能比较引用数据类型,所有的对象都会继承Object类中的方法,如果没有重写Object类中的equals方法,equals方法和==号比较引用数据类型无区别,重写后的equals方法比较的是对象中的属性
