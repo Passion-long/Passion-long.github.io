@@ -864,7 +864,244 @@ class Son extends Father {
 	method(Cat c)
 * //Animal a = new Cat();		开发的时候很少在创建对象的时候用父类引用指向子类对象,直接创建子类对象更方便,可以使用子类中的特有属性和行为,当做参数的时候用多态最好,因为扩展性强.
 
+### 09.08_面向对象(多态中的题目分析题)
+* A:看下面程序是否有问题，如果没有，说出结果
+* 
+		class Fu {
+			public void show() {
+				System.out.println("fu show");
+			}
+		}
+	
+		class Zi extends Fu {
+			public void show() {
+				System.out.println("zi show");
+			}
+	
+			public void method() {
+				System.out.println("zi method");
+			}
+		}
+	
+		class Test1Demo {
+			public static void main(String[] args) {
+				Fu f = new Zi();
+				f.method();
+				f.show();
+			}
+		}
+* B:看下面程序是否有问题，如果没有，说出结果
+* 
+		class A {
+			public void show() {
+				show2();
+			}
+			public void show2() {
+				System.out.println("我");
+			}
+		}
+		class B extends A {
+			public void show2() {
+				System.out.println("爱");
+			}
+		}
+		class C extends B {
+			public void show() {
+				super.show();
+			}
+			public void show2() {
+				System.out.println("你");
+			}
+		}
+		public class Test2DuoTai {
+			public static void main(String[] args) {
+				A a = new B();
+				a.show();
+				
+				B b = new C();
+				b.show();
+			}
+		}
+### 09.09_面向对象(抽象类的概述及其特点)
+* A:抽象类概述
+	* 抽象就是看不懂的 
+* B:抽象类特点
+	* a:抽象类和抽象方法必须用abstract关键字修饰
+		* abstract class 类名 {}
+		* public abstract void eat();
+	* b:抽象类不一定有抽象方法，有抽象方法的类一定是抽象类或者是接口
+	* c:抽象类不能实例化那么，抽象类如何实例化呢?
+		* 按照多态的方式，由具体的子类实例化。其实这也是多态的一种，抽象类多态。
+	* d:抽象类的子类
+		* 要么是抽象类
+		* 要么重写抽象类中的所有抽象方法
+* C:案例演示
+	* 抽象类特点B:抽象类特点
+	* a:抽象类和抽象方法必须用abstract关键字修饰
+		* abstract class 类名 {}
+		* public abstract void eat();
+	* b:抽象类不一定有抽象方法，有抽象方法的类一定是抽象类或者是接口
+	* c:抽象类不能实例化那么，抽象类如何实例化呢?
+		* 按照多态的方式，由具体的子类实例化。其实这也是多态的一种，抽象类多态。
+	* d:**抽象类的子类**
+		* **要么是抽象类**
+		* **要么重写抽象类中的所有抽象方法**
+### 09.10_面向对象(抽象类的成员特点)
+* A:抽象类的成员特点
+	* a:成员变量：既可以是变量，也可以是常量。abstract是否可以修饰成员变量?不能修饰成员变量
+	* b:构造方法：有。
+		* 用于子类访问父类数据的初始化。
+	* c:成员方法：既可以是抽象的，也可以是非抽象的。
+* B:案例演示
+	* 抽象类的成员特点
+* C:抽象类的成员方法特性：
+	* a:抽象方法 强制要求子类做的事情。
+	* b:非抽象方法 子类继承的事情，提高代码复用性。
+### 09.15_面向对象(抽象类中的面试题)
+* A:面试题1
+	* 一个抽象类如果没有抽象方法，可不可以定义为抽象类?如果可以，有什么意义?
+	* 可以
+	* 这么做目的只有一个,就是不让其他类创建本类对象,交给子类完成
+* B:面试题2
+	* abstract不能和哪些关键字共存
+```
+class Demo4_Abstract {
+	public static void main(String[] args) {
+		System.out.println("Hello World!");
+	}
+}
+/*
+* A:面试题1
+	* 一个抽象类如果没有抽象方法，可不可以定义为抽象类?如果可以，有什么意义?
+	* 可以
+	* 这么做目的只有一个,就是不让其他类创建本类对象,交给子类完成
+* B:面试题2
+	* abstract不能和哪些关键字共存
+	abstract和static
+	被abstract修饰的方法没有方法体
+	被static修饰的可以用类名.调用,但是类名.调用抽象方法是没有意义的
+	abstract和final
+	被abstract修饰的方法强制子类重写
+	被final修饰的不让子类重写,所以他俩是矛盾
+	abstract和private
+	被abstract修饰的是为了让子类看到并强制重写
+	被private修饰不让子类访问,所以他俩是矛盾的
+*/
 
+abstract class Demo {
+	//public static abstract void print();		//错误: 非法的修饰符组合: abstract和static
+	//public final abstract void print();		//错误: 非法的修饰符组合: abstract和final
+	private abstract void print();				//错误: 非法的修饰符组合: abstract和private
+}
+```
+### 09.16_面向对象(接口的概述及其特点)
+* A:接口概述
+	* 从狭义的角度讲就是指java中的interface
+	* 从广义的角度讲对外提供规则的都是接口 
+* B:接口特点
+	* a:接口用关键字interface表示	
+		* interface 接口名 {}
+	* b:类实现接口用implements表示
+		* class 类名 implements 接口名 {}
+	* c:接口不能实例化
+		* 那么，接口如何实例化呢?
+		* 按照多态的方式来实例化。
+	* d:接口的子类
+		* a:可以是抽象类。但是意义不大。
+		* b:可以是具体类。要重写接口中的所有抽象方法。(推荐方案)
+	* e:接口中的方法都是抽象的。
+	
+* C:案例演示
+	* 接口特点
+### 09.17_面向对象(接口的成员特点)
+* A:接口成员特点
+	* 成员变量；只能是常量，并且是静态的并公共的。
+		* 默认修饰符：public static final。他们三个是没有顺序的，可以是：public final static；public static final；static public final；static final public；final public static；final static public。 建议：自己手动给出。
+	* 构造方法：接口没有构造方法。
+	* 成员方法：只能是抽象方法。
+		* 默认修饰符：public abstract。建议：自己手动给出。
+* B:案例演示
+	* 接口成员特点
+```
+interface Inter {
+	public static final int num = 10;
+	//public Inter(){}					接口中没有构造方法
 
+	/*public void print() {				接口中不能定义非抽象方法
+	
+	}*/
 
+	public abstract void print();
+}
+class Demo /*extends Object*/ implements Inter {	//一个类不写继承任何类,默认继承Object类
+	public void print() {
+		//num = 20;
+		System.out.println(num);
+	}
 
+	public Demo() {
+		super();//默认继承Object，所以可以使用super()
+	}
+
+}
+```
+### 09.18_面向对象(类与类,类与接口,接口与接口的关系)
+* A:类与类,类与接口,接口与接口的关系
+	* a:类与类：
+		* 继承关系,只能单继承,可以多层继承。
+	* b:类与接口：
+		* 实现关系,可以单实现,也可以多实现。
+		* 并且还可以在继承一个类的同时实现多个接口。
+	* c:接口与接口：
+		* 继承关系,可以单继承,也可以多继承。
+* B:案例演示
+	* 类与类,类与接口,接口与接口的关系
+```
+class Demo3_Interface {
+	public static void main(String[] args) {
+		System.out.println("Hello World!");
+	}
+}
+
+interface InterA {
+	public abstract void printA();
+}
+
+interface InterB {
+	public abstract void printB();
+}
+
+interface InterC extends InterB,InterA {
+}
+//class Demo implements InterA,implements InterB {		//这么做不允许是非法的
+class Demo extends Object implements InterA,InterB {		//这样写可以，implements只能写一次
+	public void printA() {
+		System.out.println("printA");
+	}
+
+	public void printB() {
+		System.out.println("printB");
+	}
+}
+```
+### 09.19_面向对象(抽象类和接口的区别)
+* A:成员区别
+	* 抽象类：
+		* 成员变量：可以变量，也可以常量
+		* 构造方法：有
+		* 成员方法：可以抽象，也可以非抽象
+	* 接口：
+		* 成员变量：只可以常量
+		* 成员方法：只可以抽象
+		
+* B:关系区别
+	* 类与类
+		* 继承，单继承
+	* 类与接口
+		* 实现，单实现，多实现
+	* 接口与接口
+		* 继承，单继承，多继承
+		
+* C:设计理念区别
+	* 抽象类 被继承体现的是：”is a”的关系。抽象类中定义的是该继承体系的**共性功能。**
+	* 接口 被实现体现的是：”like a”的关系。接口中定义的是该继承体系的**扩展功能。**
