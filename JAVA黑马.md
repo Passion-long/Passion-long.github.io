@@ -1433,3 +1433,368 @@ public class Demo2_GetClass {
 ### 11.20_常见对象(==号和equals方法的区别)(掌握)
 * ==是一个比较运算符号,既可以比较基本数据类型,也可以比较引用数据类型,基本数据类型比较的是值,引用数据类型比较的是地址值
 * equals方法是一个方法,只能比较引用数据类型,所有的对象都会继承Object类中的方法,如果没有重写Object类中的equals方法,equals方法和==号比较引用数据类型无区别,重写后的equals方法比较的是对象中的属性
+### 12.04_常见对象(String类的构造方法)(掌握)
+* A:常见构造方法
+	* public String():空构造
+	* public String(byte[] bytes):把字节数组转成字符串
+	* public String(byte[] bytes,int index,int length):把字节数组的一部分转成字符串
+	* public String(char[] value):把字符数组转成字符串
+	* public String(char[] value,int index,int count):把字符数组的一部分转成字符串
+	* public String(String original):把字符串常量值转成字符串
+* B:案例演示	
+	* 演示String类的常见构造方法
+### 12.05_常见对象(String类的常见面试题)(掌握)
+* 1.判断定义为String类型的s1和s2是否相等
+	* String s1 = "abc";
+	* String s2 = "abc";
+	* System.out.println(s1 == s2);       //true（常量池中没有这个字符串对象，就创建一个，如果有直接用即可）					
+	* System.out.println(s1.equals(s2));  //true		
+* 2.下面这句话在内存中创建了几个对象?
+	* String s1 = new String("abc");	//创建两个对象，一个在常量池中，一个在堆内存中。
+* 3.判断定义为String类型的s1和s2是否相等
+	* String s1 = new String("abc");	//记录的是堆内存对象的地址值（栈变量方法，堆对象，方法区里有class和常量池）
+	* String s2 = "abc";			//记录的是常量池中的地址值
+	* System.out.println(s1 == s2);		//false
+	* System.out.println(s1.equals(s2));	//true
+* 4.判断定义为String类型的s1和s2是否相等
+	* String s1 = "a" + "b" + "c"; 
+	* String s2 = "abc";
+	* System.out.println(s1 == s2);		//true,java中有常量优化机制
+	* System.out.println(s1.equals(s2));	//true（因为String重写了里面的方法，比较的是里面的内容）
+* 5.判断定义为String类型的s1和s2是否相等
+	* String s1 = "ab";
+	* String s2 = "abc";
+	* String s3 = s1 + "c";			
+	* System.out.println(s3 == s2);		//false
+	* System.out.println(s3.equals(s2));	//true
+* String面试题5:
+![String面试题5](https://github.com/Passion-long/Passion-long.github.io/blob/master/Figure/String%20interview%20question%205.png)  
+### 12.06_常见对象(String类的判断功能)(掌握)
+* A:String类的判断功能
+	* boolean equals(Object obj):比较字符串的内容是否相同,区分大小写
+	* boolean equalsIgnoreCase(String str):比较字符串的内容是否相同,忽略大小写
+	* boolean contains(String str):判断大字符串中是否包含小字符串
+	* boolean startsWith(String str):判断字符串是否以某个指定的字符串开头
+	* boolean endsWith(String str):判断字符串是否以某个指定的字符串结尾
+	* boolean isEmpty():判断字符串是否为空。
+	* ""和null的区别：
+		* ""是字符串常量,同时也是一个String类的对象,既然是对象当然可以调用String类中的方法
+		* null是空常量,不能调用任何的方法,否则会出现空指针异常,null常量可以给任意的引用数据类型赋值
+```
+	public static void main(String[] args) {
+		String s1 = "heima";
+		String s2 = "";
+		String s3 = null;
+		
+		System.out.println(s1.isEmpty());	//false
+		System.out.println(s2.isEmpty());	//true
+		System.out.println(s3.isEmpty());	//java.lang.NullPointerException
+	}
+```
+### 12.08_常见对象(String类的获取功能)(掌握)
+* A:String类的获取功能
+	* int length():获取字符串的长度。
+	* char charAt(int index):获取指定索引位置的字符
+	* int indexOf(int ch):返回指定字符在此字符串中第一次出现处的索引。
+	* int indexOf(String str):返回指定字符串在此字符串中第一次出现处的索引。
+	* int indexOf(int ch,int fromIndex):返回指定字符在此字符串中从指定位置后第一次出现处的索引。
+	* int indexOf(String str,int fromIndex):返回指定字符串在此字符串中从指定位置后第一次出现处的索引。包含头，不包含尾。
+	* lastIndexOf
+	* String substring(int start):从指定位置开始截取字符串,默认到末尾。
+	* String substring(int start,int end):从指定位置开始到指定位置结束截取字符串。
+* B:String类的转换功能
+	* byte[] getBytes():把字符串转换为字节数组。
+	* char[] toCharArray():把字符串转换为字符数组。
+	* static String valueOf(char[] chs):把字符数组转成字符串。底层是由String类的构造方法完成的。
+	* static String valueOf(int i):把int类型的数据转成字符串。
+		* 注意：String类的valueOf方法可以把任意类型的数据转成字符串。
+
+
+	* String toLowerCase():把字符串转成小写。(了解)
+	* String toUpperCase():把字符串转成大写。
+	* String concat(String str):把字符串拼接。用+拼接字符串更强大,可以用字符串与任意类型相加；concat方法调用的和传入的都必须是字符串。
+### 12.12_常见对象(按要求转换字符)(链式编程掌握)
+* A:案例演示
+	* 需求：把一个字符串的首字母转成大写，其余为小写。(只考虑英文大小写字母字符)
+```
+package com.heima.test;
+
+public class Test4 {
+	public static void main(String[] args) {
+		String s = "woaiHEImaniaima";
+		String s2 = s.substring(0, 1).toUpperCase().concat(s.substring(1).toLowerCase());
+		System.out.println(s2);
+	}
+}
+
+```
+### 12.14_常见对象(String类的其他功能)
+* A:String的替换功能及案例演示
+	* String replace(char old,char new)
+	* String replace(String old,String new)
+* B:String的去除字符串两空格及案例演示
+	* String trim()
+* C:String的按字典顺序比较两个字符串及案例演示
+	* int compareTo(String str)(暂时不用掌握)
+	* int compareToIgnoreCase(String str)(了解)
+### 13.1_常见对象(StringBuffer和String的相互转换)
+```
+public class Demo6_StringBuffer {
+
+	/**
+	 * * A:String -- StringBuffer
+		* a:通过构造方法
+		* b:通过append()方法
+	* B:StringBuffer -- String
+		* a:通过构造方法
+		* b:通过toString()方法
+		* c:通过subString(0,length);
+
+	 */
+	public static void main(String[] args) {
+		//demo1();
+		StringBuffer sb = new StringBuffer("heima");
+		
+		String s1 = new String(sb);				//通过构造将StringBuffer转换为String
+		System.out.println(s1);
+		
+		String s2 = sb.toString();				//通过toString方法将StringBuffer转换为String
+		System.out.println(s2);
+		
+		String s3 = sb.substring(0, sb.length());		//通过截取子字符串将StringBuffer转换为String
+		System.out.println(s3);
+	}
+
+	private static void demo1() {
+		StringBuffer sb1 = new StringBuffer("heima");		//通过构造方法将字符串转换为StringBuffer对象
+		System.out.println(sb1);
+		
+		StringBuffer sb2 = new StringBuffer();
+		sb2.append("heima");					//通过append方法将字符串转换为StringBuffer对象
+		System.out.println(sb2);
+	}
+
+}
+```
+### 13.2_常见对象(StringBuffer和StringBuilder的区别)
+* A:面试题
+	* StringBuffer是jdk1.0版本的，是线程安全的，效率低
+	* StringBuilder是jdk1.5版本的，是线程不安全的，效率高
+	* String是一个不可变的字符序列
+	* StringBuffer，StringBuilder是可变的字符序列
+### 13.3_常见对象(String和StringBuilder分别作为参数传递)
+* A:形式参数问题
+	* String作为参数传递
+	* StringBuffer作为参数传递 
+* B:案例演示
+	* 基本数据类型的值传递,不改变其值
+	* 引用数据类型的值传递,改变其值
+	* String类虽然是引用数据类型,但是他当作参数传递时和基本数据类型是一样的
+```
+package com.heima.stringbuffer;
+
+public class Demo7_StringBuffer {
+	public static void main(String[] args) {
+		String s = "heima";
+		System.out.println(s);
+		change(s);
+		System.out.println(s);
+		
+		
+		System.out.println("---------------------");
+		StringBuffer sb = new StringBuffer();
+		sb.append("heima");
+		System.out.println(sb);
+		change(sb);
+		System.out.println(sb);
+	}
+
+	public static void change(StringBuffer sb) {
+		sb.append("itcast");
+	}
+
+	public static void change(String s) {
+		s += "itcast";
+	}
+
+}
+输出结果：
+heima
+heima
+---------------------
+heima
+heimaitcast
+```
+### 13.16_常见对象(冒泡排序和选择排序)
+```
+package com.heima.array;
+
+public class Demo1_Array {
+
+	/**
+	 * * A:案例演示
+	* 数组高级冒泡排序代码
+	* 数组高级选择排序代码
+	 */
+	public static void main(String[] args) {
+		int[] arr = {24, 69, 80, 57, 13};
+		bubbleSort(arr);
+		//selectSort(arr);
+		print(arr);
+	}
+	
+	/*
+	 * 冒泡排序
+	 * 1,返回值类型,void
+	 * 2,参数列表,int[] arr
+	 * 
+	 * 	第一次:arr[0]与arr[1],arr[1]与arr[2],arr[2]与arr[3],arr[3]与arr[4]比较4次
+		第二次:arr[0]与arr[1],arr[1]与arr[2],arr[2]与arr[3]比较3次
+		第三次:arr[0]与arr[1],arr[1]与arr[2]比较2次
+		第四次:arr[0]与arr[1]比较1次
+	 */
+	
+	public static void bubbleSort(int[] arr) {
+		for (int i = 0; i < arr.length - 1; i++) {				//外循环只需要比较arr.length-1次就可以了
+			for (int j = 0; j < arr.length - 1 - i; j++) {		//-1为了防止索引越界,-i为了提高效率
+				if(arr[j] > arr[j+1]) {
+					/*int temp = arr[j];
+					arr[j] = arr[j + 1];
+					arr[j+1] = temp;*/
+					swap(arr,j,j+1);
+				}
+			}
+		}
+	}
+	
+	/*
+	 * 打印数组
+	 * 1,返回值类型void
+	 * 2,参数列表int[]arr
+	 */
+	
+	public static void print(int[] arr) {
+		for (int i = 0; i < arr.length; i++) {
+			System.out.print(arr[i] + " ");
+		}
+	}
+	
+	/*
+	 * 选择排序
+	 * 1,返回值类型void
+	 * 2,参数列表int[] arr
+	 * 
+	 * 	第一次:arr[0]分别与arr[1-4]比较,比较4次
+		第二次:arr[1]分别与arr[2-4]比较,比较3次
+		第三次:arr[2]分别与arr[3-4]比较,比较2次
+		第四次:arr[3]与arr[4]比较,比较1次
+	 */
+	
+	public static void selectSort(int[] arr) {
+		for (int i = 0; i < arr.length - 1; i++) {				//只需要比较arr.length-1次
+			for (int j = i + 1; j < arr.length; j++) {
+				if(arr[i] > arr[j]) {
+					/*int temp = arr[i];
+					arr[i] = arr[j];
+					arr[j] = temp;*/
+					swap(arr,i,j);
+				}
+			}
+		}
+	}
+	
+	/*
+	 * 换位操作
+	 * 1,返回值类型,void
+	 * 2,参数列表int[] arr.int i,int j
+	 * 
+	 * 如果某个方法,只针对本类使用,不想让其他类使用就可以定义成私有的
+	 */
+	
+	private static void swap(int[] arr,int i,int j) {
+		int temp = arr[i];
+		arr[i] = arr[j];
+		arr[j] = temp;
+	}
+}
+
+```
+### 13.19_常见对象(基本类型包装类的概述)
+* A:为什么会有基本类型包装类
+	* 将基本数据类型封装成对象的好处在于可以在对象中定义更多的功能方法操作该数据。
+* B:常用操作
+	* 常用的操作之一：用于基本数据类型与字符串之间的转换。
+* C:基本类型和包装类的对应
+* 
+		byte 			Byte
+		short			Short
+		int			Integer
+		long			Long
+		float			Float
+		double			Double
+		char			Character
+		boolean			Boolean
+```
+package com.heima.wrapclass;
+public class Demo1_Integer {
+	public static void main(String[] args) {
+		System.out.println(Integer.toBinaryString(60));//转换为二进制
+		System.out.println(Integer.toOctalString(60));//转换为八进制
+		System.out.println(Integer.toHexString(60));//转换为十六进制
+	}
+}
+```
+### 13.21_常见对象(String和int类型的相互转换)
+* A:int -- String
+	* a:和""进行拼接
+	* b:public static String valueOf(int i)
+	* c:int -- Integer -- String(Integer类的toString方法())
+	* d:public static String toString(int i)(Integer类的静态方法)
+* B:String -- int
+	* a:String -- Integer -- int
+		* public static int parseInt(String s)
+基本数据类型包装类有八种,其中七种都有parseXxx的方法,可以将这七种的字符串表现形式转换成基本数据类型,char的包装类Character中没有pareseXxx的方法,字符串到字符的转换通过toCharArray()就可以把字符串转换为字符数组.
+```
+private static void demo1() {
+	//int ----> String int转换成String
+	int i = 100;
+	String s1 = i + "";				//推荐用
+	String s2 = String.valueOf(i);			//推荐用
+
+	Integer i2 = new Integer(i);
+	String s3 = i2.toString();
+
+	String s4 = Integer.toString(i);
+	System.out.println(s1);
+
+	//String----> int String 转换int
+	String s = "200";
+	Integer i3 = new Integer(s);
+	int i4 = i3.intValue();				//将Integer转换成了int数
+
+	int i5 = Integer.parseInt(s);			//将String转换为int,推荐用这种
+}
+```
+### 13.21_常见对象(JDK5的自动装箱和自动拆箱)
+* A:JDK5的新特性
+	* 自动装箱：把基本类型转换为包装类类型
+	* 自动拆箱：把包装类类型转换为基本类型
+* B:案例演示
+	* JDK5的新特性自动装箱和拆箱
+
+	* Integer ii = 100;
+	* ii += 200;
+* C:注意事项
+	* 在使用时，Integer  x = null;代码就会出现NullPointerException。
+	* 建议先判断是否为null，然后再使用。
+* D:Integer和String使用new一个对象再判断时，都重写了equals方法，因此比较的都是里面的内容是不是相等，而不是判断地址是不是相等。而使用Integer/String i = 97/"abc"时，这个时候因为都在常量池中，所以使用==和equals都是相等的。
+* -128到127是byte的取值范围,如果在这个取值范围内,自动装箱就不会新创建对象,而是从常量池中获取
+		 * 如果超过了byte取值范围就会再新创建对象
+
+
+
+
+
+
+
+
