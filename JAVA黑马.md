@@ -1788,10 +1788,17 @@ private static void demo1() {
 	* 在使用时，Integer  x = null;代码就会出现NullPointerException。
 	* 建议先判断是否为null，然后再使用。
 * D:Integer和String使用new一个对象再判断时，都重写了equals方法，因此比较的都是里面的内容是不是相等，而不是判断地址是不是相等。而使用Integer/String i = 97/"abc"时，这个时候因为都在常量池中，所以使用==和equals都是相等的。
-* -128到127是byte的取值范围,如果在这个取值范围内,自动装箱就不会新创建对象,而是从常量池中获取
-		 * 如果超过了byte取值范围就会再新创建对象
-
-
+* E:-128到127是byte的取值范围,如果在这个取值范围内,自动装箱就不会新创建对象,而是从常量池中获取,如果超过了byte取值范围就会再新创建对象.
+### 14.09_常见对象(Pattern和Matcher的概述)
+* A:Pattern和Matcher的概述
+* B:模式和匹配器的典型调用顺序
+	* 通过JDK提供的API，查看Pattern类的说明
+	* 典型的调用顺序是: 
+```
+Pattern p = Pattern.compile("a*b");//获取到正则表达式
+Matcher m = p.matcher("aaaaab");//获取匹配器
+boolean b = m.matches();//看是否能匹配,匹配就返回true
+```
 
 
 
