@@ -1799,6 +1799,470 @@ Pattern p = Pattern.compile("a*b");//获取到正则表达式
 Matcher m = p.matcher("aaaaab");//获取匹配器
 boolean b = m.matches();//看是否能匹配,匹配就返回true
 ```
+### 14.11_常见对象(Math类概述和方法使用)
+* A:Math类概述
+	* Math 类包含用于执行基本数学运算的方法，如初等指数、对数、平方根和三角函数。 
+* B:成员方法
+	* public static int abs(int a)
+	* public static double ceil(double a)//ceil:天花板.向上取整，但是结果是一个double值。
+	* public static double floor(double a)//floor:地板.向下取整，但是结果是一个double值。
+	* public static int max(int a,int b) min自学
+	* public static double pow(double a,double b)
+	* public static double random()
+	* public static int round(float a) //四舍五入
+	* public static double sqrt(double a)
+### 14.12_常见对象(Random类的概述和方法使用)
+* A:Random类的概述
+	* 此类用于产生随机数如果用相同的种子创建两个 Random 实例，
+	* 则对每个实例进行相同的方法调用序列，它们将生成并返回相同的数字序列。
+* B:构造方法
+	* public Random()
+	* public Random(long seed)//seed固定后，下次还是生成一样的随机数
+* C:成员方法
+	* public int nextInt()
+	* public int nextInt(int n)(重点掌握)//生成0到n范围内的随机数，包含0不包含n
+### 14.13_常见对象(System类的概述和方法使用)
+* A:System类的概述
+	* System 类包含一些有用的类字段和方法。它不能被实例化。 
+* B:成员方法
+	* public static void gc()
+	* public static void exit(int status)
+	* public static long currentTimeMillis()
+	* pubiic static void arraycopy(Object src, int srcPos, Object dest, int destPos, int length) 
+* C:案例演示
+	* System类的成员方法使用
+```
+package com.heima.otherclass;
+
+public class Demo3_System {
+
+	public static void main(String[] args) {
+		//demo1();
+		//demo2();
+		//demo3();
+		
+		int[] src = {11,22,33,44,55};
+		int[] dest = new int[8];
+		for (int i = 0; i < dest.length; i++) {
+			System.out.println(dest[i]);
+		}
+		
+		System.out.println("--------------------------");
+		System.arraycopy(src, 0, dest, 0, src.length);		//将数组内容拷贝
+		
+		for (int i = 0; i < dest.length; i++) {
+			System.out.println(dest[i]);
+		}
+	}
+
+	public static void demo3() {
+		long start = System.currentTimeMillis();		//1秒等于1000毫秒
+		for(int i = 0; i < 1000; i++) {
+			System.out.println("*");
+		}
+		long end = System.currentTimeMillis();			//获取当前时间的毫秒值
+		
+		System.out.println(end - start);
+	}
+
+	public static void demo2() {
+		System.exit(1);							//非0状态是异常终止,退出jvm
+		System.out.println("11111111111");
+	}
+
+	public static void demo1() {
+		for(int i = 0; i < 100; i++) {
+			new Demo();
+			System.gc();						//运行垃圾回收器,相当于呼喊保洁阿姨
+		}
+	}
+
+}
+
+class Demo {									//在一个源文件中不允许定义两个用public修饰的类
+
+	@Override
+	public void finalize() {					//finalize()是Object中的方法，通过System.gc调用
+		System.out.println("垃圾被清扫了");
+	}							
+	
+}
+```
+### 14.14_常见对象(BigInteger类的概述和方法使用)
+* A:BigInteger的概述
+	* 可以让超过Integer范围内的数据进行运算
+* B:构造方法
+	* public BigInteger(String val)
+* C:成员方法
+	* public BigInteger add(BigInteger val)
+	* public BigInteger subtract(BigInteger val)
+	* public BigInteger multiply(BigInteger val)
+	* public BigInteger divide(BigInteger val)
+	* public BigInteger[] divideAndRemainder(BigInteger val)//取除数和余数
+### 14.15_常见对象(BigDecimal类的概述和方法使用)
+* A:BigDecimal的概述
+	* 由于在运算的时候，float类型和double很容易丢失精度，演示案例。
+	* 所以，为了能精确的表示、计算浮点数，Java提供了BigDecimal
+
+	* 不可变的、任意精度的有符号十进制数。
+* B:构造方法
+	* public BigDecimal(String val)
+* C:成员方法
+	* public BigDecimal add(BigDecimal augend)
+	* public BigDecimal subtract(BigDecimal subtrahend)
+	* public BigDecimal multiply(BigDecimal multiplicand)
+	* public BigDecimal divide(BigDecimal divisor)
+* D:案例演示
+	* BigDecimal类的构造方法和成员方法使用
+```
+package com.heima.otherclass;
+
+import java.math.BigDecimal;
+
+public class Demo5_BigDecimal {
+
+	public static void main(String[] args) {
+		//System.out.println(2.0 - 1.1);
+		/*BigDecimal bd1 = new BigDecimal(2.0);		//这种方式在开发中不推荐,因为不够精确
+		BigDecimal bd2 = new BigDecimal(1.1);
+		
+		System.out.println(bd1.subtract(bd2));*/
+		
+		/*BigDecimal bd1 = new BigDecimal("2.0");	//通过构造中传入字符串的方式,开发时推荐
+		BigDecimal bd2 = new BigDecimal("1.1");
+		
+		System.out.println(bd1.subtract(bd2));*/
+		
+		BigDecimal bd1 = BigDecimal.valueOf(2.0);	//这种方式在开发中也是推荐的
+		BigDecimal bd2 = BigDecimal.valueOf(1.1);
+		
+		System.out.println(bd1.subtract(bd2));
+	}
+
+}
+```
+### 14.16_常见对象(Date类的概述和方法使用)(掌握)
+* A:Date类的概述
+	* 类 Date 表示特定的瞬间，精确到毫秒。 
+* B:构造方法
+	* public Date()
+	* public Date(long date)
+* C:成员方法
+	* public long getTime()
+	* public void setTime(long time)
+```
+package com.heima.otherclass;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class Demo7_SimpleDateFormat {
+l
+	public static void main(String[] args) throws ParseException {
+		//demo1();
+		//demo2();
+		//demo3();
+		
+		//将时间字符串转换成日期对象
+		String str = "2000年08月08日 08:08:08";
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
+		Date d = sdf.parse(str);						//将时间字符串转换成日期对象
+		System.out.println(d);
+	}
+
+	public static void demo3() {
+		Date d = new Date();							//获取当前时间对象
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");//创建日期格式化类对象
+		System.out.println(sdf.format(d));				//将日期对象转换为字符串
+	}
+
+	public static void demo2() {
+		Date d = new Date();							//获取当前时间对象
+		SimpleDateFormat sdf = new SimpleDateFormat();	//创建日期格式化类对象
+		System.out.println(sdf.format(d));	 			//88-6-6 下午9:31
+	}
+
+	public static void demo1() {
+		//DateFormat df = new DateFormat();				//DateFormat是抽象类,不允许实例化
+		//DateFormat df1 = new SimpleDateFormat();
+		DateFormat df1 = DateFormat.getDateInstance();	//相当于父类引用指向子类对象,右边的方法返回一个子类对象
+	}
+
+}
+```
+### 14.19_常见对象(Calendar类的概述和获取日期的方法)(掌握)
+* A:Calendar类的概述
+	* Calendar 类是一个抽象类，它为特定瞬间与一组诸如 YEAR、MONTH、DAY_OF_MONTH、HOUR 等日历字段之间的转换提供了一些方法，并为操作日历字段（例如获得下星期的日期）提供了一些方法。
+* B:成员方法
+	* public static Calendar getInstance()
+	* public int get(int field)
+
+
+### 14.20_常见对象(Calendar类的add()和set()方法)(掌握)
+* A:成员方法
+	* public void add(int field,int amount)
+	* public final void set(int year,int month,int date)
+* B:案例演示
+	* Calendar类的成员方法使用
+### 14.21_常见对象(如何获取任意年份是平年还是闰年)(掌握)
+* A:案例演示
+	* 需求：键盘录入任意一个年份，判断该年是闰年还是平年
+```
+import java.util.Scanner;
+public class Main{
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        while (scanner.hasNext()) {
+            int i = scanner.readInt();
+            System.out.println(((i % 4 == 0 && i % 100 != 0) || i % 400 == 0) ? "闰年" : "平年" );
+        }
+    }
+}
+```
+### 15.02_集合框架(集合的由来及集合继承体系图)
+* A:集合的由来
+	* 数组长度是固定,当添加的元素超过了数组的长度时需要对数组重新定义,太麻烦,java内部给我们提供了集合类,能存储任意对象,长度是可以改变的,随着元素的增加而增加,随着元素的减少而减少 
+* B:数组和集合的区别
+	* 区别1 : 
+		* 数组既可以存储基本数据类型,又可以存储引用数据类型,基本数据类型存储的是值,引用数据类型存储的是地址值
+		* 集合只能存储引用数据类型(对象)集合中也可以存储基本数据类型,但是在存储的时候会自动装箱变成对象
+	* 区别2:
+		* 数组长度是固定的,不能自动增长
+		* 集合的长度的是可变的,可以根据元素的增加而增长
+* C:数组和集合什么时候用
+		* 1,如果元素个数是固定的推荐用数组
+		* 2,如果元素个数不是固定的推荐用集合
+* D:集合继承体系图：
+![集合体系图](https://github.com/Passion-long/Passion-long.github.io/blob/master/Figure/Set%20system%20diagram.png)  
+### 15.03_集合框架(Collection集合的基本功能测试)
+* A:案例演示	
+* 
+		基本功能演示
+		
+		boolean add(E e)
+		boolean remove(Object o)
+		void clear()
+		boolean contains(Object o)
+		boolean isEmpty()
+		int size()
+
+* B:注意:
+* 
+		collectionXxx.java使用了未经检查或不安全的操作.
+		注意:要了解详细信息,请使用 -Xlint:unchecked重新编译.
+		java编译器认为该程序存在安全隐患
+		温馨提示:这不是编译失败,所以先不用理会,等学了泛型你就知道了
+		
+		add方法如果是List集合一直都返回true,因为List集合中是可以存储重复元素的
+		如果是Set集合当存储重复元素的时候,就会返回false
+		
+		ArrayList的父类的父类重写toString方法,所以在打印对象的引用的时候,输出的结果不是Object类中toString的结果
+* C:@SuppressWarnings({ "rawtypes", "unchecked" })//保持原始类型，不检查。
+### 15.04_集合框架(集合的遍历之集合转数组遍历)
+* A:集合的遍历
+	* 其实就是依次获取集合中的每一个元素。
+* B:案例演示
+	* 把集合转成数组，可以实现集合的遍历
+	* toArray()
+	*
+		
+			Collection coll = new ArrayList();
+			coll.add(new Student("张三",23));		//Object obj = new Student("张三",23);
+			coll.add(new Student("李四",24));
+			coll.add(new Student("王五",25));
+			coll.add(new Student("赵六",26));
+			
+			Object[] arr = coll.toArray();				//将集合转换成数组
+			for (int i = 0; i < arr.length; i++) {
+				Student s = (Student)arr[i];			//强转成Student
+				System.out.println(s.getName() + "," + s.getAge());
+			}
+### 15.05_集合框架(Collection集合的带All功能测试)
+* A:案例演示
+* 
+		带All的功能演示
+		
+		boolean addAll(Collection c)//将c2中的每一个元素添加到c1中
+		boolean removeAll(Collection c)//删除的是交集
+		boolean containsAll(Collection c)//判断调用的集合是否包含传入的集合
+		boolean retainAll(Collection c)//取交集,取交集,如果调用的集合改变就返回true,如果调用的集合不变就返回false
+* alt + shift + r改名
+```
+c1.addAll(c2);							//将c2中的每一个元素添加到c1中
+c1.add(c2);							//将c2看成一个对象添加到c1中
+```
+### 15.06_集合框架(集合的遍历之迭代器遍历)
+* A:迭代器概述
+	* 集合是用来存储元素,存储的元素需要查看,那么就需要迭代(遍历) 
+* B:案例演示
+	* 迭代器的使用
+		
+			Collection c = new ArrayList();
+			c.add("a");
+			c.add("b");
+			c.add("c");
+			c.add("d");
+			
+			Iterator it = c.iterator();						//获取迭代器的引用
+			while(it.hasNext()) {							//集合中的迭代方法(遍历)
+				System.out.println(it.next());
+			}
+### 15.07_集合框架(Collection存储自定义对象并遍历)
+* A:案例演示
+	* Collection存储自定义对象并用迭代器遍历
+	* 
+			Collection c = new ArrayList();
+			
+			c.add(new Student("张三",23));
+			c.add(new Student("李四",24));
+			c.add(new Student("王五",25));
+			c.add(new Student("赵六",26));
+			c.add(new Student("赵六",26));
+			
+			for(Iterator it = c.iterator();it.hasNext();) {
+				Student s = (Student)it.next();						//向下转型
+				System.out.println(s.getName() + "," + s.getAge());	//获取对象中的姓名和年龄
+			}
+			System.out.println("------------------------------");
+			Iterator it = c.iterator();								//获取迭代器
+			while(it.hasNext()) {									//判断集合中是否有元素
+				//System.out.println(((Student)(it.next())).getName() + "," + ((Student)(it.next())).getAge());
+				Student s = (Student)it.next();						//向下转型
+				System.out.println(s.getName() + "," + s.getAge());	//获取对象中的姓名和年龄
+			}
+### 15.08_集合框架(迭代器的原理及源码解析)(了解)
+* A:迭代器原理
+	* 迭代器原理:迭代器是对集合进行遍历,而每一个集合内部的存储结构都是不同的,所以每一个集合存和取都是不一样,那么就需要在每一个类中定义hasNext()和next()方法,这样做是可以的,但是会让整个集合体系过于臃肿,迭代器是将这样的方法向上抽取出接口,然后在每个类的内部,定义自己迭代方式,这样做的好处有二,第一规定了整个集合体系的遍历方式都是hasNext()和next()方法,第二,代码有底层内部实现,使用者不用管怎么实现的,会用即可 
+* B:迭代器源码解析
+	* 1,在eclipse中ctrl + shift + t找到ArrayList类
+	* 2,ctrl+o查找iterator()方法
+	* 3,查看返回值类型是new Itr(),说明Itr这个类实现Iterator接口
+	* 4,查找Itr这个内部类,发现重写了Iterator中的所有抽象方法 
+### 15.09_集合框架(List集合的特有功能概述和测试)
+* A:List集合的特有功能概述（E就是Object）
+	* void add(int index,E element)
+	* E remove(int index)
+	* E get(int index)
+	* E set(int index,E element)
+### 15.10_集合框架(List集合存储学生对象并遍历)
+* A:案例演示
+	* 通过size()和get()方法结合使用遍历。
+
+			List list = new ArrayList();
+			list.add(new Student("张三", 18));
+			list.add(new Student("李四", 18));
+			list.add(new Student("王五", 18));
+			list.add(new Student("赵六", 18));
+			
+			for(int i = 0; i < list.size(); i++) {
+				Student s = (Student)list.get(i);
+				System.out.println(s.getName() + "," + s.getAge());
+			}
+### 15.11_集合框架(并发修改异常产生的原因及解决方案)
+* A:案例演示
+	* 需求：我有一个集合，请问，我想判断里面有没有"world"这个元素，如果有，我就添加一个"javaee"元素，请写代码实现。
+
+			List list = new ArrayList();
+			list.add("a");
+			list.add("b");
+			list.add("world");
+			list.add("d");
+			list.add("e");
+			
+			/*Iterator it = list.iterator();
+			while(it.hasNext()) {
+				String str = (String)it.next();
+				if(str.equals("world")) {
+					list.add("javaee");			//这里会抛出ConcurrentModificationException并发修改异常
+				}
+			}*/
+* B:ConcurrentModificationException出现
+	* 迭代器遍历，集合修改集合
+* C:解决方案
+	* a:迭代器迭代元素，迭代器修改元素(ListIterator的特有功能add)
+	* b:集合遍历元素，集合修改元素
+
+			ListIterator lit = list.listIterator();		//如果想在遍历的过程中添加元素,可以用ListIterator中的add方法
+			while(lit.hasNext()) {
+				String str = (String)lit.next();
+				if(str.equals("world")) {
+					lit.add("javaee");	
+					//list.add("javaee");
+				}
+			}
+### 15.12_集合框架(ListIterator)(了解)
+* boolean hasNext()是否有下一个
+* boolean hasPrevious()是否有前一个
+* Object next()返回下一个元素
+* Object previous();返回上一个元素
+### 15.13_集合框架(Vector的特有功能)(了解)
+* A:Vector类概述（Vector已经被ArrayList替代了）
+* B:Vector类特有功能
+	* public void addElement(E obj)
+	* public E elementAt(int index)
+	* public Enumeration elements()
+* C:案例演示	
+	* Vector的迭代
+
+			Vector v = new Vector();				//创建集合对象,List的子类
+			v.addElement("a");
+			v.addElement("b");
+			v.addElement("c");
+			v.addElement("d");
+			
+			//Vector迭代
+			Enumeration en = v.elements();			//获取枚举
+			while(en.hasMoreElements()) {			//判断集合中是否有元素
+				System.out.println(en.nextElement());//获取集合中的元素
+			}
+### 15.14_集合框架(数据结构之数组和链表)
+* A:数组
+	* 查询快修改也快
+	* 增删慢
+* B:链表
+	* 查询慢,修改也慢
+	* 增删快
+### 15.15_集合框架(List的三个子类的特点)
+* A:List的三个子类的特点
+* 
+		ArrayList:
+			底层数据结构是数组，查询快，增删慢。
+			线程不安全，效率高。
+		Vector:
+			底层数据结构是数组，查询快，增删慢。
+			线程安全，效率低。
+		Vector相对ArrayList查询慢(线程安全的)
+		Vector相对LinkedList增删慢(数组结构)
+		LinkedList:
+			底层数据结构是链表，查询慢，增删快。
+			线程不安全，效率高。
+
+		Vector和ArrayList的区别
+			Vector是线程安全的,效率低
+			ArrayList是线程不安全的,效率高
+		共同点:都是数组实现的
+		ArrayList和LinkedList的区别
+			ArrayList底层是数组结果,查询和修改快
+			LinkedList底层是链表结构的,增和删比较快,查询和修改比较慢
+		共同点:都是线程不安全的
+* B:List有三个儿子，我们到底使用谁呢?
+		查询多用ArrayList
+		增删多用LinkedList
+		如果都多ArrayList
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
