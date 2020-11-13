@@ -2745,16 +2745,255 @@ public class Demo5_ArrayListArrayList {
 	* 返回0，集合中只有一个元素
 	* 返回-1，集合会将存储的元素倒序
 	* 返回1，集合会怎么存就怎么取
-### 17.11
+### 17.15_集合框架(TreeSet原理)
+* 1. 特点
+	* TreeSet是用来排序的，可以指定一个顺序，对象存入之后会按照指定的顺序排列
+* 2. 使用方式
+	* a.自然排序(Comparable)
+		* TreeSet类的add()方法中会把存入的对象提升为Comparable类型
+		* 调用对象的compareTo()方法和集合中的对象比较
+		* 根据compareTo()方法返回的结果进行存储
+	* b.比较器顺序(Comparator)
+		* 创建TreeSet的时候可以制定一个Comparator
+		* 如果传入了Comparator的子类对象，那么TreeSet就会按照比较器中的顺序排序
+		* add()方法内部会自动调用Comparator接口中的compare()方法排序
+		* 调用的对象时compare方法的第一个参数，集合中的对象是compare方法的第二个参数
+	* c.两种方式的区别
+		* TreeSet构造函数什么都不传，默认按照类中的Comparable的顺序(没有就报错ClassCastException)
+		* TreeSet如果传入Comparator，就优先按照Comparator
+### 17.16_集合框架的练习
+```
+package com.heima.test;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.TreeSet;
 
+public class Test4 {
 
+	/**
+	 * 在一个集合中存储了无序并且重复的字符串,定义一个方法,让其有序(字典顺序),而且还不能去除重复
+	 * 
+	 * 分析:
+	 * 1,定义一个List集合,并存储重复的无序的字符串
+	 * 2,定义方法对其排序保留重复
+	 * 3,打印List集合
+	 */
+	public static void main(String[] args) {
+		//1,定义一个List集合,并存储重复的无序的字符串
+		ArrayList<String> list = new ArrayList<>();
+		list.add("aaa");
+		list.add("aaa");
+		list.add("ccc");
+		list.add("ddd");
+		list.add("fffffffffff");
+		list.add("heima");
+		list.add("itcast");
+		list.add("bbbb");
+		list.add("aaa");
+		list.add("aaa");
+		
+		//2,定义方法对其排序保留重复
+		sort(list);
+		
+		//3,打印list
+		System.out.println(list);
+	}
+	
+	/*
+	 * 定义方法,排序并保留重复
+	 * 分析:
+	 * 1,创建TreeSet集合对象,因为String本身就具备比较功能,但是重复不会保留,所以我们用比较器
+	 * 2,将list集合中所有的元素添加到TrreSet集合中,对其排序,保留重复
+	 * 3,清空list集合
+	 * 4,将TreeSet集合中排好序的元素添加到list中
+	 */
+	public static void sort(List<String> list) {
+		//1,创建TreeSet集合对象,因为String本身就具备比较功能,但是重复不会保留,所以我们用比较器
+		TreeSet<String> ts = new TreeSet<>(new Comparator<String>() {//实现Comparator接口，重写里面的compare方法，匿名内部类
 
+			@Override
+			public int compare(String s1, String s2) {
+				int num = s1.compareTo(s2);					//比较内容为主要条件
+				return num == 0 ? 1 : num;					//保留重复
+			}
+		});
+		//2,将list集合中所有的元素添加到TrreSet集合中,对其排序,保留重复
+		ts.addAll(list);
+		//3,清空list集合
+		list.clear();
+		//4,将TreeSet集合中排好序的元素添加到list中
+		list.addAll(ts);
+	}
 
+}
+```
+### 17.17_集合框架的练习
+```
+package com.heima.test;
 
+import java.util.Comparator;
+import java.util.Scanner;
+import java.util.TreeSet;
 
+public class Test5 {
 
+	/**
+	 * 从键盘接收一个字符串, 程序对其中所有字符进行排序,例如键盘输入: helloitcast程序打印:acehillostt
+	 * 分析:
+	 * 1,键盘录入字符串,Scanner
+	 * 2,将字符串转换为字符数组
+	 * 3,定义TreeSet集合,传入比较器对字符排序并保留重复
+	 * 4,遍历字符数组,将每一个字符存储在TreeSet集合中
+	 * 5,遍历TreeSet集合,打印每一个字符
+	 */
+	public static void main(String[] args) {
+		//1,键盘录入字符串,Scanner
+		Scanner sc = new Scanner(System.in);
+		System.out.println("请输入一个字符串");
+		String line = sc.nextLine();
+		//2,将字符串转换为字符数组
+		char[] arr = line.toCharArray();
+		//3,定义TreeSet集合,传入比较器对字符排序并保留重复
+		TreeSet<Character> ts = new TreeSet<>(new Comparator<Character>() {
 
+			@Override
+			public int compare(Character c1, Character c2) {
+				//int num = c1 - c2;				//自动拆箱
+				int num = c1.compareTo(c2);
+				return num == 0 ? 1 : num;
+			}
+		});
+		
+		//4,遍历字符数组,将每一个字符存储在TreeSet集合中
+		for(char c : arr) {
+			ts.add(c);							//自动装箱
+		}
+		
+		//5,遍历TreeSet集合,打印每一个字符
+		for(Character c : ts) {
+			System.out.print(c);
+		}
+	}
+
+}
+```
+### 17.18_集合框架的练习
+```
+package com.heima.test;
+
+import java.util.Comparator;
+import java.util.Scanner;
+import java.util.TreeSet;
+
+public class Test6 {
+
+	/**
+	 * 程序启动后, 可以从键盘输入接收多个整数, 直到输入quit时结束输入. 把所有输入的整数倒序排列打印.
+	 * 
+	 * 1,创建Scanner对象,键盘录入
+	 * 2,创建TreeSet集合对象,TreeSet集合中传入比较器
+	 * 3,无限循环不断接收整数,遇到quit退出,因为退出是quit,所以键盘录入的时候应该都以字符串的形式录入
+	 * 4,判断是quit就退出,不是将其转换为Integer,并添加到集合中
+	 * 5,遍历TreeSet集合并打印每一个元素
+	 */
+	public static void main(String[] args) {
+		//1,创建Scanner对象,键盘录入
+		Scanner sc = new Scanner(System.in);
+		//2,创建TreeSet集合对象,TreeSet集合中传入比较器
+		TreeSet<Integer> ts = new TreeSet<>(new Comparator<Integer>() {
+
+			@Override
+			public int compare(Integer i1, Integer i2) {
+				//int num = i2 - i1;					//自动拆箱
+				int num = i2.compareTo(i1);
+				return num == 0 ? 1 : num;
+			}
+		});
+		//3,无限循环不断接收整数,遇到quit退出,因为退出是quit,所以键盘录入的时候应该都以字符串的形式录入
+		while(true) {
+			String line = sc.nextLine();				//将键盘录入的字符串存储在line中
+			if("quit".equals(line)) {
+				break;
+			}
+			//4,判断是quit就退出,不是将其转换为Integer,并添加到集合中
+			Integer i = Integer.parseInt(line);
+			ts.add(i);
+		}
+		
+		// 5,遍历TreeSet集合并打印每一个元素
+		for (Integer integer : ts) {
+			System.out.println(integer);
+		}
+	}
+
+}
+
+```
+### 17.19_集合框架的练习
+```
+package com.heima.test;
+
+import java.util.Comparator;
+import java.util.Scanner;
+import java.util.TreeSet;
+
+import com.heiam.bean.Student;
+
+public class Test7 {
+
+	/**
+	 * * A:案例演示
+	 * 需求：键盘录入5个学生信息(姓名,语文成绩,数学成绩,英语成绩),按照总分从高到低输出到控制台。
+	 * 
+	 * 分析:
+	 * 1,定义一个学生类
+	 * 		成员变量:姓名,语文成绩,数学成绩,英语成绩,总成绩
+	 * 		成员方法:空参,有参构造,有参构造的参数分别是姓名,语文成绩,数学成绩,英语成绩
+	 * 			  toString方法,在遍历集合中的Student对象打印对象引用的时候会显示属性值
+	 * 2,键盘录入需要Scanner,创建键盘录入对象
+	 * 3,创建TreeSet集合对象,在TreeSet的构造函数中传入比较器,按照总分比较
+	 * 4,录入五个学生,所以以集合中的学生个数为判断条件,如果size是小于5就进行存储
+	 * 5,将录入的字符串切割,用逗号切割,会返回一个字符串数组,将字符串数组中从二个元素转换成int数,
+	 * 6,将转换后的结果封装成Student对象,将Student添加到TreeSet集合中
+	 * 7,遍历TreeSet集合打印每一个Student对象
+	 */
+	public static void main(String[] args) {
+		//2,键盘录入需要Scanner,创建键盘录入对象
+		Scanner sc = new Scanner(System.in);
+		System.out.println("请输入学生成绩格式是:姓名,语文成绩,数学成绩,英语成绩");
+		//3,创建TreeSet集合对象,在TreeSet的构造函数中传入比较器,按照总分比较
+		TreeSet<Student> ts = new TreeSet<>(new Comparator<Student>() {
+
+			@Override
+			public int compare(Student s1, Student s2) {
+				int num = s2.getSum() - s1.getSum();
+				return num == 0 ? 1 : num;
+			}
+		});
+		//4,录入五个学生,所以以集合中的学生个数为判断条件,如果size是小于5就进行存储
+		while(ts.size() < 5) {
+			//5,将录入的字符串切割,用逗号切割,会返回一个字符串数组,将字符串数组中从二个元素转换成int数,
+			String line = sc.nextLine();
+			String[] arr = line.split(",");
+			int chinese = Integer.parseInt(arr[1]);
+			int math = Integer.parseInt(arr[2]);
+			int english = Integer.parseInt(arr[3]);
+			//6,将转换后的结果封装成Student对象,将Student添加到TreeSet集合中
+			ts.add(new Student(arr[0], chinese, math, english));
+		}
+		
+		//7,遍历TreeSet集合打印每一个Student对象
+		System.out.println("排序后的学生信息:");
+		for (Student s : ts) {
+			System.out.println(s);
+		}
+	}
+
+}
+
+```
 
 
 
