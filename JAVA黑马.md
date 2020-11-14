@@ -3147,6 +3147,7 @@ public class Test7 {
 		public static <T> T max(Collection<?> coll)
 		public static void reverse(List<?> list)
 		public static void shuffle(List<?> list)//随机置换，可以用来洗牌
+	
 ### 18.15_集合框架(泛型固定下边界)
 	 * 泛型固定下边界
 	 * ? super E  
@@ -3214,14 +3215,88 @@ class CompareByAge implements Comparator<Student> {
 }
 ```
 
+### 19.01_异常(异常的概述和分类)
+* A:异常的概述
+	* 异常就是Java程序在运行过程中出现的错误。
+* B:异常的分类
+	* 通过API查看Throwable
+	* Error
+		* 服务器宕机,数据库崩溃等
+	* Exception
+C:异常的继承体系
+	* Throwable
+		* Error	
+		* Exception
+			* RuntimeException
 
+### 19.03_异常(try...catch的方式处理异常1)
+* A:异常处理的两种方式
+	* a:try…catch…finally
+		* try catch
+		* try catch finally
+		* try finally 
+	* b:throws
+* B:try...catch处理异常的基本格式
+	* try…catch…finally
+* C:案例演示
+	* try...catch的方式处理1个异常
+	* 案例演示：
+	* try...catch的方式处理多个异常
+	* JDK7以后处理多个异常的方式及注意事项
+	* 
+	* 安卓,客户端开发,如何处理异常?try{}catch(Exception e){}
+	* ee,服务端开发,一般都是底层开发,从底层向上抛
+	* 
+	* try后面如果跟多个catch,那么小的异常放前面,大的异常放后面,根据多态的原理,如果大的放前面,就会将所有的子类对象接收
+	* 后面的catch就没有意义了
+	
+### 19.05_异常(编译期异常和运行期异常的区别)
+* A:编译期异常和运行期异常的区别
+	* Java中的异常被分为两大类：编译时异常和运行时异常。
+	* 所有的RuntimeException类及其子类的实例被称为运行时异常，其他的异常就是编译时异常
+	
+	* 编译时异常
+		* Java程序必须显示处理，否则程序就会发生错误，无法通过编译
+	* 运行时异常
+		* 无需显示处理，也可以和编译时异常一样处理
+* B:案例演示
+	* 编译期异常和运行期异常的区别
+```
+* 编译期异常和运行期异常的区别
+编译时异常也叫做未雨绸缪异常(老师自己定义的)
+未雨绸缪:在做某些事情的时候要做某些准备
+编译时异常:在编译某个程序的时候,有可能会有这样那样的事情发生,比如文件找不到,这样的异常就必须在编译的时候处理
+如果不处理编译通不过
 
+运行时异常:就是程序员所犯得错误,需要回来修改代码
+```
+### 19.06_异常(Throwable的几个常见方法)
+* A:Throwable的几个常见方法
+	* a:getMessage()
+		* 获取异常信息，返回字符串。
+	* b:toString()
+		* 获取异常类名和异常信息，返回字符串。
+	* c:printStackTrace()
+		* 获取异常类名和异常信息，以及异常出现在程序中的位置。返回值void。
+* B:案例演示
+	* Throwable的几个常见方法的基本使用
+```
+package com.heima.exception;
 
+public class Demo5_Throwable {
 
+	public static void main(String[] args) {
+		try {
+			System.out.println(1/0);
+		} catch (Exception e) {			//Exception e = new ArithmeticException("/ by zero");
+			//System.out.println(e.getMessage());		//获取异常信息
+			//System.out.println(e); 		//调用toString方法,打印异常类名和异常信息
+			e.printStackTrace();		//jvm默认就用这种方式处理异常
+		}
+	}
 
-
-
-
+}
+```
 
 
 
