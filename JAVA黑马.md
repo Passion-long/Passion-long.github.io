@@ -3050,6 +3050,7 @@ public class Test7 {
 		* Collection<V> values():获取集合中所有值的集合
 	* e:长度功能
 		* int size()：返回集合中的键值对的个数
+	
 ### 18.03_集合框架(Map集合的遍历之键找值)
 * A:键找值思路：
 	* 获取所有键的集合
@@ -3064,17 +3065,235 @@ public class Test7 {
 			hm.put("王五", 25);
 			hm.put("赵六", 26);
 			
-			/*Set<String> keySet = hm.keySet();			//获取集合中所有的键
+			/*Set<String> keySet = hm.keySet();		//获取集合中所有的键
 			Iterator<String> it = keySet.iterator();	//获取迭代器
-			while(it.hasNext()) {						//判断单列集合中是否有元素
-				String key = it.next();					//获取集合中的每一个元素,其实就是双列集合中的键
-				Integer value = hm.get(key);			//根据键获取值
+			while(it.hasNext()) {				//判断单列集合中是否有元素
+				String key = it.next();			//获取集合中的每一个元素,其实就是双列集合中的键
+				Integer value = hm.get(key);		//根据键获取值
 				System.out.println(key + "=" + value);	//打印键值对
 			}*/
 			
-			for(String key : hm.keySet()) {				//增强for循环迭代双列集合第一种方式
+			for(String key : hm.keySet()) {			//增强for循环迭代双列集合第一种方式
 				System.out.println(key + "=" + hm.get(key));
 			}
+### 18.04_集合框架(Map集合的遍历之键值对对象找键和值)
+* A:键值对对象找键和值思路：
+	* 获取所有键值对对象的集合
+	* 遍历键值对对象的集合，获取到每一个键值对对象
+	* 根据键值对对象找键和值
+* B:案例演示
+	* Map集合的遍历之键值对对象找键和值
+	
+			HashMap<String, Integer> hm = new HashMap<>();
+			hm.put("张三", 23);
+			hm.put("李四", 24);
+			hm.put("王五", 25);
+			hm.put("赵六", 26);
+			/*Set<Map.Entry<String, Integer>> entrySet = hm.entrySet();	//获取所有的键值对象的集合
+			Iterator<Entry<String, Integer>> it = entrySet.iterator();//获取迭代器
+			while(it.hasNext()) {
+				//Map.Entry<String, Integer> en = it.next();		//父类引用指向子类对象，获取键值对对象
+				Entry<String, Integer> en = it.next();			//直接获取的是子类对象，获取键值对对象（因为Entry是个内部类，Entry实现了Map.Entry）
+				String key = en.getKey();				//根据键值对对象获取键
+				Integer value = en.getValue();				//根据键值对对象获取值
+				System.out.println(key + "=" + value);
+			}*/
+			
+			for(Entry<String,Integer> en : hm.entrySet()) {
+				System.out.println(en.getKey() + "=" + en.getValue());
+			}
+### 18.06_集合框架(LinkedHashMap的概述和使用)
+* A:案例演示
+	* LinkedHashMap的特点
+		* 底层是链表实现的可以保证怎么存就怎么取
+### 18.07_集合框架(TreeMap集合键是Student值是String的案例)
+* A:案例演示
+	* TreeMap集合键是Student值是String的案例
+### 18.08_集合框架(统计字符串中每个字符出现的次数)
+* A:案例演示
+	* 需求：统计字符串中每个字符出现的次数
+			String str = "aaaabbbcccccccccc";
+			char[] arr = str.toCharArray();						//将字符串转换成字符数组
+			HashMap<Character, Integer> hm = new HashMap<>();	//创建双列集合存储键和值
+			
+			for(char c : arr) {									//遍历字符数组
+				/*if(!hm.containsKey(c)) {						//如果不包含这个键
+					hm.put(c, 1);								//就将键和值为1添加
+				}else {											//如果包含这个键
+					hm.put(c, hm.get(c) + 1);					//就将键和值再加1添加进来
+				}
+				
+				//hm.put(c, !hm.containsKey(c) ? 1 : hm.get(c) + 1);
+				Integer i = !hm.containsKey(c) ? hm.put(c, 1) : hm.put(c, hm.get(c) + 1);
+						}
+			
+			for (Character key : hm.keySet()) {					//遍历双列集合
+				System.out.println(key + "=" + hm.get(key));
+			}
+### 18.10_集合框架(HashMap和Hashtable的区别)
+* A:面试题
+	* HashMap和Hashtable的区别
+		* Hashtable是JDK1.0版本出现的,是线程安全的,效率低,HashMap是JDK1.2版本出现的,是线程不安全的,效率高
+		* Hashtable不可以存储null键和null值,HashMap可以存储null键和null值
+* B:案例演示	
+	* HashMap和Hashtable的区别
+### 18.11_集合框架(Collections工具类的概述和常见方法讲解)
+* A:Collections类概述
+	* 针对集合操作 的工具类
+* B:Collections成员方法
+* 
+		public static <T> void sort(List<T> list)
+		public static <T> int binarySearch(List<?> list,T key)
+		public static <T> T max(Collection<?> coll)
+		public static void reverse(List<?> list)
+		public static void shuffle(List<?> list)//随机置换，可以用来洗牌
+### 18.15_集合框架(泛型固定下边界)
+	 * 泛型固定下边界
+	 * ? super E  
+	 * 
+	 * 泛型固定上边界
+	 * ? extends E
+```
+package com.heima.collections;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.TreeSet;
+
+import com.heima.bean.BaseStudent;
+import com.heima.bean.Student;
+
+public class Demo2_Genric {
+
+	/**
+	 * 泛型固定下边界
+	 * ? super E  
+	 * 
+	 * 泛型固定上边界
+	 * ? extends E
+	 */
+	public static void main(String[] args) {
+		//demo1();
+		TreeSet<Student> ts1 = new TreeSet<>(new CompareByAge());
+		ts1.add(new Student("张三", 33));
+		ts1.add(new Student("李四", 13));
+		ts1.add(new Student("王五", 23));
+		ts1.add(new Student("赵六", 43));
+		
+		TreeSet<BaseStudent> ts2 = new TreeSet<>(new CompareByAge());
+		ts2.add(new BaseStudent("张三", 33));
+		ts2.add(new BaseStudent("李四", 13));
+		ts2.add(new BaseStudent("王五", 23));
+		ts2.add(new BaseStudent("赵六", 43));
+		
+		System.out.println(ts2);
+	}
+
+	public static void demo1() {
+		ArrayList<Student> list1 = new ArrayList<>();
+		list1.add(new Student("张三", 23));
+		list1.add(new Student("李四", 24));
+		
+		ArrayList<BaseStudent> list2 = new ArrayList<>();
+		list2.add(new BaseStudent("王五", 25));
+		list2.add(new BaseStudent("赵六", 26));
+		
+		list1.addAll(list2);
+	}
+
+}
+
+class CompareByAge implements Comparator<Student> {
+
+	@Override
+	public int compare(Student s1, Student s2) {
+		int num = s1.getAge() - s2.getAge();
+		return num == 0 ? s1.getName().compareTo(s2.getName()) :  num;
+	}
+	
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
