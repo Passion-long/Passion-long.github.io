@@ -2742,9 +2742,12 @@ public class Demo5_ArrayListArrayList {
 	 * 当compareTo方法返回负数的时候集合会倒序存储
 * 2.解释：二叉树：两个叉
 	* 小的存储在左边（负数），大的存储在右边（整数），相等就不存（0）.
+	* compareTo方法，在TreeSet集合如何存储元素取决于compareTo方法的返回值.
 	* 返回0，集合中只有一个元素
-	* 返回-1，集合会将存储的元素倒序
 	* 返回1，集合会怎么存就怎么取
+	* 返回-1，集合会将存储的元素倒序
+	* 返回num = this.age - o.age，集合会按从小到大的顺序输出（二叉树的中序遍历）
+	
 ### 17.15_集合框架(TreeSet原理)
 * 1. 特点
 	* TreeSet是用来排序的，可以指定一个顺序，对象存入之后会按照指定的顺序排列
@@ -2761,6 +2764,11 @@ public class Demo5_ArrayListArrayList {
 	* c.两种方式的区别
 		* TreeSet构造函数什么都不传，默认按照类中的Comparable的顺序(没有就报错ClassCastException)
 		* TreeSet如果传入Comparator，就优先按照Comparator
+```
+TreeSet构造方法摘要：
+TreeSet(Comparator<? super E> comparator) 
+          构造一个新的空 TreeSet，它根据指定比较器进行排序。
+```
 ### 17.16_集合框架的练习
 ```
 package com.heima.test;
