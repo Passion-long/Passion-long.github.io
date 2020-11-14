@@ -2756,11 +2756,40 @@ public class Demo5_ArrayListArrayList {
 		* TreeSet类的add()方法中会把存入的对象提升为Comparable类型
 		* 调用对象的compareTo()方法和集合中的对象比较
 		* 根据compareTo()方法返回的结果进行存储
+		```
+		class Person implements Comparable<Person> {
+			/*****省略*****/
+			public int compareTo(Person o) {
+				int length = this.name.length() - o.name.length();		//比较长度为主要条件
+				int num = length == 0 ? this.name.compareTo(o.name) : length;	//比较内容为次要条件
+				return num == 0 ? this.age - o.age : num;			//比较年龄为次要条件
+			}
+		}
+		public class Demo3_TreeSet {
+			public static void main(String[] args) {
+				demo1();
+			}
+			public static void demo1() {
+				TreeSet<Integer> ts = new TreeSet<>();
+				ts.add(3);
+				ts.add(1);
+				ts.add(1);
+				ts.add(2);
+				ts.add(2);
+				ts.add(3);
+				ts.add(3);
+
+				System.out.println(ts);
+			}
+
+		}
+		```
 	* b.比较器顺序(Comparator)
 		* 创建TreeSet的时候可以制定一个Comparator
 		* 如果传入了Comparator的子类对象，那么TreeSet就会按照比较器中的顺序排序
 		* add()方法内部会自动调用Comparator接口中的compare()方法排序
 		* 调用的对象时compare方法的第一个参数，集合中的对象是compare方法的第二个参数
+		* 例子如下面的17.16、17.17、17.18、17.19.
 	* c.两种方式的区别
 		* TreeSet构造函数什么都不传，默认按照类中的Comparable的顺序(没有就报错ClassCastException)
 		* TreeSet如果传入Comparator，就优先按照Comparator
@@ -3000,7 +3029,6 @@ public class Test7 {
 	}
 
 }
-
 ```
 
 
