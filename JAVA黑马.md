@@ -4133,9 +4133,10 @@ class AgeOutOfBoundsException extends Exception {
 	* 打印: print(), println()
 	* 自动刷出: PrintWriter(OutputStream out, boolean autoFlush, String encoding) 
 	* 打印流只操作数据目的
+	* PrintStream和PrintWriter分别是打印的字节流和字符流,只操作数据目的的
 
 			PrintWriter pw = new PrintWriter(new FileOutputStream("g.txt"), true);
-			pw.write(97);
+			pw.write(97);					//查找码表,找到对应的a并打印
 			pw.print("大家好");
 			pw.println("你好");				//自动刷出,只针对的是println方法
 			pw.close();
@@ -4204,12 +4205,9 @@ class AgeOutOfBoundsException extends Exception {
 * B:案例演示
 	* Properties的load()和store()功能
 	
-
-### 22.18_day22总结
-* 把今天的知识点总结一遍。
-
-
-
+### 23.注意递归传递值的时候不要用var++或者++var就可以了，因为返回的时候会改变var的值，直接用var + 1就可以了。  
+  
+### 24.
 
 
 
