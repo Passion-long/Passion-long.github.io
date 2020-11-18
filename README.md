@@ -21,5 +21,5 @@
 [Waking-Up](https://github.com/wolverinn/Waking-Up)  
 黑马视频  
   
-* 学习资料推荐：  
+* Android学习资料推荐：  
 [gityuan](http://gityuan.com/)  
