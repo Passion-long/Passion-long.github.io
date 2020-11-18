@@ -19,4 +19,7 @@
   
 * 部分参考：  
 [Waking-Up](https://github.com/wolverinn/Waking-Up)  
-<font color=#008000>黑马视频</font>  
+黑马视频  
+  
+* 学习资料推荐：  
+[gityuan](http://gityuan.com/)  
