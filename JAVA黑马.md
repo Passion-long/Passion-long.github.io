@@ -3955,7 +3955,7 @@ class AgeOutOfBoundsException extends Exception {
 		FileInputStream fis2 = new FileInputStream("b.txt");	//创建输入流对象,关联b.txt
 		FileInputStream fis3 = new FileInputStream("c.txt");	//创建输入流对象,关联c.txt
 		Vector<InputStream> v = new Vector<>();					//创建vector集合对象
-		v.add(fis1);											//将流对象添加
+		v.add(fis1);								//将流对象添加
 		v.add(fis2);
 		v.add(fis3);
 		Enumeration<InputStream> en = v.elements();				//获取枚举引用
@@ -3992,14 +3992,14 @@ class AgeOutOfBoundsException extends Exception {
 ### 22.04_IO流(内存输出流之黑马面试题)(掌握)
 * 定义一个文件输入流,调用read(byte[] b)方法,将a.txt文件中的内容打印出来(byte数组大小限制为5)
 * 
-			FileInputStream fis = new FileInputStream("a.txt");				//创建字节输入流,关联a.txt
+			FileInputStream fis = new FileInputStream("a.txt");			//创建字节输入流,关联a.txt
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();		//创建内存输出流
-			byte[] arr = new byte[5];										//创建字节数组,大小为5
+			byte[] arr = new byte[5];						//创建字节数组,大小为5
 			int len;
-			while((len = fis.read(arr)) != -1) {							//将文件上的数据读到字节数组中
-				baos.write(arr, 0, len);									//将字节数组的数据写到内存缓冲区中
+			while((len = fis.read(arr)) != -1) {					//将文件上的数据读到字节数组中
+				baos.write(arr, 0, len);					//将字节数组的数据写到内存缓冲区中
 			}
-			System.out.println(baos);										//将内存缓冲区的内容转换为字符串打印
+			System.out.println(baos);						//将内存缓冲区的内容转换为字符串打印
 			fis.close();
 ### 22.05_IO流(随机访问流概述和读写数据)(了解)
 * A:随机访问流概述
@@ -4152,11 +4152,11 @@ class AgeOutOfBoundsException extends Exception {
 			System.setIn(new FileInputStream("a.txt"));				//修改标准输入流
 			System.setOut(new PrintStream("b.txt"));				//修改标准输出流
 			
-			InputStream in = System.in;								//获取标准输入流
-			PrintStream ps = System.out;							//获取标准输出流
+			InputStream in = System.in;						//获取标准输入流
+			PrintStream ps = System.out;						//获取标准输出流
 			int b;
-			while((b = in.read()) != -1) {							//从a.txt上读取数据
-				ps.write(b);										//将数据写到b.txt上
+			while((b = in.read()) != -1) {						//从a.txt上读取数据
+				ps.write(b);							//将数据写到b.txt上
 			}
 			
 			in.close();
@@ -4166,8 +4166,8 @@ class AgeOutOfBoundsException extends Exception {
 		System.setIn(new FileInputStream("IO图片.png"));		//改变标准输入流
 		System.setOut(new PrintStream("copy.png")); 		//改变标准输出流
 		
-		InputStream is = System.in;							//获取标准输入流
-		PrintStream ps = System.out;						//获取标准输出流
+		InputStream is = System.in;				//获取标准输入流
+		PrintStream ps = System.out;				//获取标准输出流
 		
 		int len;
 		byte[] arr = new byte[1024 * 8];
@@ -4246,8 +4246,8 @@ class AgeOutOfBoundsException extends Exception {
 				 * @param args
 				 */
 				public static void main(String[] args) {
-					MyThread mt = new MyThread();							//4,创建自定义类的对象
-					mt.start();									//5,开启线程
+					MyThread mt = new MyThread();						//4,创建自定义类的对象
+					mt.start();								//5,开启线程
 					
 					for(int i = 0; i < 3000; i++) {
 						System.out.println("bb");
@@ -4255,9 +4255,9 @@ class AgeOutOfBoundsException extends Exception {
 				}
 			
 			}
-			class MyThread extends Thread {									//1,定义类继承Thread
-				public void run() {											//2,重写run方法
-					for(int i = 0; i < 3000; i++) {							//3,将要执行的代码,写在run方法中
+			class MyThread extends Thread {								//1,定义类继承Thread
+				public void run() {								//2,重写run方法
+					for(int i = 0; i < 3000; i++) {						//3,将要执行的代码,写在run方法中
 						System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 					}
 				}
@@ -4277,10 +4277,10 @@ class AgeOutOfBoundsException extends Exception {
 				 * @param args
 				 */
 				public static void main(String[] args) {
-					MyRunnable mr = new MyRunnable();						//4,创建自定义类对象
+					MyRunnable mr = new MyRunnable();					//4,创建自定义类对象
 					//Runnable target = new MyRunnable();
-					Thread t = new Thread(mr);							//5,将其当作参数传递给Thread的构造函数
-					t.start();									//6,开启线程
+					Thread t = new Thread(mr);						//5,将其当作参数传递给Thread的构造函数
+					t.start();								//6,开启线程
 					
 					for(int i = 0; i < 3000; i++) {
 						System.out.println("bb");
@@ -4288,10 +4288,10 @@ class AgeOutOfBoundsException extends Exception {
 				}
 			}
 			
-			class MyRunnable implements Runnable {								//1,自定义类实现Runnable接口
+			class MyRunnable implements Runnable {							//1,自定义类实现Runnable接口
 				@Override
-				public void run() {									//2,重写run方法
-					for(int i = 0; i < 3000; i++) {							//3,将要执行的代码,写在run方法中
+				public void run() {								//2,重写run方法
+					for(int i = 0; i < 3000; i++) {						//3,将要执行的代码,写在run方法中
 						System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 					}
 				}
@@ -4318,8 +4318,8 @@ class AgeOutOfBoundsException extends Exception {
 ### 24.08_多线程(匿名内部类实现线程的两种方式)(掌握)
 * 继承Thread类
 	 	
-		new Thread() {													//1,new 类(){}继承这个类
-			public void run() {											//2,重写run方法
+		new Thread() {											//1,new 类(){}继承这个类
+			public void run() {									//2,重写run方法
 				for(int i = 0; i < 3000; i++) {							//3,将要执行的代码,写在run方法中
 					System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 				}
@@ -4327,8 +4327,8 @@ class AgeOutOfBoundsException extends Exception {
 		}.start();
 * 实现Runnable接口
 			
-		new Thread(new Runnable(){										//1,new 接口(){}实现这个接口
-			public void run() {											//2,重写run方法
+		new Thread(new Runnable(){									//1,new 接口(){}实现这个接口
+			public void run() {									//2,重写run方法
 				for(int i = 0; i < 3000; i++) {							//3,将要执行的代码,写在run方法中
 					System.out.println("bb");
 				}
@@ -4397,7 +4397,7 @@ class AgeOutOfBoundsException extends Exception {
 					}
 				}
 			}).start();
-			Thread.currentThread().setName("我是主线程");					//获取主函数线程的引用,并改名字
+			Thread.currentThread().setName("我是主线程");		//获取主函数线程的引用,并改名字
 			System.out.println(Thread.currentThread().getName());		//获取主函数线程的引用,并获取名字
 ### 24.11_多线程(休眠线程)(掌握)
 * Thread.sleep(毫秒,纳秒), 控制当前线程休眠若干毫秒1秒= 1000毫秒 1秒 = 1000 * 1000 * 1000纳秒 1000000000
@@ -4456,10 +4456,10 @@ class AgeOutOfBoundsException extends Exception {
 				}
 			};
 			
-			t1.setDaemon(true);						//将t1设置为守护线程
+			t1.setDaemon(true);					//将t1设置为守护线程
 			
 			t1.start();
-			t2.start();
+			t2.start(); 
 ### 24.13_多线程(加入线程)(掌握)
 * join(), 当前线程暂停, 等待指定的线程执行结束后, 当前线程再继续
 * join(int), 可以等待指定的毫秒之后继续
@@ -4482,8 +4482,8 @@ class AgeOutOfBoundsException extends Exception {
 					for(int i = 0; i < 50; i++) {
 						if(i == 2) {
 							try {
-								//t1.join();						//插队,加入
-								t1.join(30);						//加入,有固定的时间,过了固定时间,继续交替执行
+								//t1.join();					//插队,加入
+								t1.join(30);					//加入,有固定的时间,过了固定时间,继续交替执行
 								Thread.sleep(10);
 							} catch (InterruptedException e) {
 								
@@ -4511,11 +4511,12 @@ class AgeOutOfBoundsException extends Exception {
 * 2.同步代码块
 	* 使用synchronized关键字加上一个锁对象来定义一段代码, 这就叫同步代码块
 	* 多个同步代码块如果使用相同的锁对象, 那么他们就是同步的
+	* 匿名内部类使用局部变量，这个局部变量必须用final修饰
 
 			class Printer {
 				Demo d = new Demo();
 				public static void print1() {
-					synchronized(d){				//锁对象可以是任意对象,但是被锁的代码需要保证是同一把锁,不能用匿名对象
+					synchronized(d){			//锁对象可以是任意对象,但是被锁的代码需要保证是同一把锁,不能用匿名对象
 						System.out.print("黑");
 						System.out.print("马");
 						System.out.print("程");
@@ -4526,7 +4527,7 @@ class AgeOutOfBoundsException extends Exception {
 				}
 	
 				public static void print2() {	
-					synchronized(d){	
+					synchronized(d){			//锁对象不能用匿名对象,因为匿名对象不是同一个对象
 						System.out.print("传");
 						System.out.print("智");
 						System.out.print("播");
@@ -4540,7 +4541,7 @@ class AgeOutOfBoundsException extends Exception {
 
 		class Printer {
 			public static void print1() {
-				synchronized(Printer.class){				//锁对象可以是任意对象,但是被锁的代码需要保证是同一把锁,不能用匿名对象
+				synchronized(Printer.class){			//锁对象可以是任意对象,但是被锁的代码需要保证是同一把锁,不能用匿名对象
 					System.out.print("黑");
 					System.out.print("马");
 					System.out.print("程");
@@ -4660,9 +4661,352 @@ class AgeOutOfBoundsException extends Exception {
 	* Vector是线程安全的,ArrayList是线程不安全的
 	* StringBuffer是线程安全的,StringBuilder是线程不安全的
 	* Hashtable是线程安全的,HashMap是线程不安全的
+	* 线程安全主要是添加了synchronized.
 ### 24.22_多线程(总结)	
 
+### 25.01_多线程(单例设计模式)(掌握)
+* 单例设计模式：保证类在内存中只有一个对象。
 
+* 如何保证类在内存中只有一个对象呢？
+	* (1)控制类的创建，不让其他类来创建本类的对象。private
+	* (2)在本类中定义一个本类的对象。Singleton s;
+	* (3)提供公共的访问方式。  public static Singleton getInstance(){return s}
+* 单例写法两种：
+	* (1)饿汉式 开发用这种方式。
+	* 
+			//饿汉式（上来着急就new对象，就使用了）
+			class Singleton {
+				//1,私有构造函数
+				private Singleton(){}
+				//2,创建本类对象
+				private static Singleton s = new Singleton();
+				//3,对外提供公共的访问方法
+				public static Singleton getInstance() {
+					return s;
+				}
+				
+				public static void print() {
+					System.out.println("11111111111");
+				}
+			}
+	* (2)懒汉式 面试写这种方式。多线程的问题？
+	* 
+			//懒汉式,单例的延迟加载模式
+			class Singleton {
+				//1,私有构造函数
+				private Singleton(){}
+				//2,声明一个本类的引用
+				private static Singleton s;
+				//3,对外提供公共的访问方法
+				public static Singleton getInstance() {
+					if(s == null)
+						//线程1,线程2。缺点：在多线程访问的时候有可能会创建多个对象
+						s = new Singleton();
+					return s;
+				}
+				
+				public static void print() {
+					System.out.println("11111111111");
+				}
+			}
+			
+* 饿汉式和懒汉式的区别：
+	* 1,饿汉式是空间换时间,懒汉式是时间换空间
+	* 2,在多线程访问时,饿汉式不会创建多个对象,而懒汉式有可能会创建多个对象
+ 
+	* (3)第三种格式（没有名字）
+	* 
+			class Singleton {
+				private Singleton() {}
+			
+				public static final Singleton s = new Singleton();//final是最终的意思,被final修饰的变量不可以被更改
+			}
+### 25.02_多线程(Runtime类)
+* Runtime类是一个单例类
+	* 
+			Runtime r = Runtime.getRuntime();
+			//r.exec("shutdown -s -t 300");		//300秒后关机
+			r.exec("shutdown -a");				//取消关机
+
+### 25.03_多线程(Timer)(掌握)
+* Timer类:计时器
+
+			public class Demo5_Timer {
+				/**
+				 * @param args
+				 * 计时器
+				 * @throws InterruptedException 
+				 */
+				public static void main(String[] args) throws InterruptedException {
+					Timer t = new Timer();
+					t.schedule(new MyTimerTask(), new Date(114,9,15,10,54,20),3000);
+					
+					while(true) {
+						System.out.println(new Date());
+						Thread.sleep(1000);
+					}
+				}
+			}
+			class MyTimerTask extends TimerTask {
+				@Override
+				public void run() {
+					System.out.println("起床背英语单词");
+				}
+				
+			}
+
+### 25.04_多线程(两个线程间的通信)(掌握)
+* 1.什么时候需要通信
+	* 多个线程并发执行时, 在默认情况下CPU是随机切换线程的
+	* 如果我们希望他们有规律的执行, 就可以使用通信, 例如每个线程执行一次打印
+* 2.怎么通信
+	* 如果希望线程等待, 就调用wait()
+	* 如果希望唤醒等待的线程, 就调用notify();
+	* 这两个方法必须在同步代码中执行, 并且使用同步锁对象来调用
+
+### 25.05_多线程(三个或三个以上间的线程通信)
+* 多个线程通信的问题
+	* notify()方法是随机唤醒一个线程
+	* notifyAll()方法是唤醒所有线程
+	* JDK5之前无法唤醒指定的一个线程
+	* 如果多个线程之间通信, 需要使用notifyAll()通知所有线程, 用while来反复判断条件
+### 25.06_多线程(JDK1.5的新特性互斥锁)(掌握)
+* 1.同步
+	* 使用ReentrantLock类的lock()和unlock()方法进行同步
+* 2.通信
+	* 使用ReentrantLock类的newCondition()方法可以获取Condition对象
+	* 需要等待的时候使用Condition的await()方法, 唤醒的时候用signal()方法
+	* 不同的线程使用不同的Condition, 这样就能区分唤醒的时候找哪个线程了
+
+
+### 25.07_多线程(线程组的概述和使用)(了解)
+* A:线程组概述
+	* Java中使用ThreadGroup来表示线程组，它可以对一批线程进行分类管理，Java允许程序直接对线程组进行控制。
+	* 默认情况下，所有的线程都属于主线程组。
+		* public final ThreadGroup getThreadGroup()//通过线程对象获取他所属于的组
+		* public final String getName()//通过线程组对象获取他组的名字
+	* 我们也可以给线程设置分组
+		* 1,ThreadGroup(String name) 创建线程组对象并给其赋值名字
+		* 2,创建线程对象
+		* 3,Thread(ThreadGroup?group, Runnable?target, String?name) 
+		* 4,设置整组的优先级或者守护线程
+	* B:案例演示
+		* 线程组的使用,默认是主线程组
+* 
+		MyRunnable mr = new MyRunnable();
+		Thread t1 = new Thread(mr, "张三");
+		Thread t2 = new Thread(mr, "李四");
+		//获取线程组
+		// 线程类里面的方法：public final ThreadGroup getThreadGroup()
+		ThreadGroup tg1 = t1.getThreadGroup();
+		ThreadGroup tg2 = t2.getThreadGroup();
+		// 线程组里面的方法：public final String getName()
+		String name1 = tg1.getName();
+		String name2 = tg2.getName();
+		System.out.println(name1);
+		System.out.println(name2);
+		// 通过结果我们知道了：线程默认情况下属于main线程组
+		// 通过下面的测试，你应该能够看到，默任情况下，所有的线程都属于同一个组
+		System.out.println(Thread.currentThread().getThreadGroup().getName());
+
+	* 自己设定线程组
+* 			
+		// ThreadGroup(String name)
+		ThreadGroup tg = new ThreadGroup("这是一个新的组");
+
+		MyRunnable mr = new MyRunnable();
+		// Thread(ThreadGroup group, Runnable target, String name)
+		Thread t1 = new Thread(tg, mr, "张三");
+		Thread t2 = new Thread(tg, mr, "李四");
+		
+		System.out.println(t1.getThreadGroup().getName());
+		System.out.println(t2.getThreadGroup().getName());
+		
+		//通过组名称设置后台线程，表示该组的线程都是后台线程
+		tg.setDaemon(true);
+### 25.08_多线程(线程的五种状态)(掌握)
+* 看图说话
+* 新建,就绪,运行,阻塞,死亡
+
+### 25.09_多线程(线程池的概述和使用)(了解)
+* A:线程池概述
+	* 程序启动一个新线程成本是比较高的，因为它涉及到要与操作系统进行交互。而使用线程池可以很好的提高性能，尤其是当程序中要创建大量生存期很短的线程时，更应该考虑使用线程池。线程池里的每一个线程代码结束后，并不会死亡，而是再次回到线程池中成为空闲状态，等待下一个对象来使用。在JDK5之前，我们必须手动实现自己的线程池，从JDK5开始，Java内置支持线程池
+* B:内置线程池的使用概述
+	* JDK5新增了一个Executors工厂类来产生线程池，有如下几个方法
+		* public static ExecutorService newFixedThreadPool(int nThreads)
+		* public static ExecutorService newSingleThreadExecutor()
+		* 这些方法的返回值是ExecutorService对象，该对象表示一个线程池，可以执行Runnable对象或者Callable对象代表的线程。它提供了如下方法
+		* Future<?> submit(Runnable task)
+		* <T> Future<T> submit(Callable<T> task)
+	* 使用步骤：
+		* 创建线程池对象
+		* 创建Runnable实例
+		* 提交Runnable实例
+		* 关闭线程池
+	* C:案例演示
+		* 提交的是Runnable
+* 
+		// public static ExecutorService newFixedThreadPool(int nThreads)
+		ExecutorService pool = Executors.newFixedThreadPool(2);
+
+		// 可以执行Runnable对象或者Callable对象代表的线程
+		pool.submit(new MyRunnable());
+		pool.submit(new MyRunnable());
+
+		//结束线程池
+		pool.shutdown();
+		
+### 25.10_多线程(多线程程序实现的方式3)(了解)
+* 提交的是Callable
+
+* 
+		// 创建线程池对象
+		ExecutorService pool = Executors.newFixedThreadPool(2);
+
+		// 可以执行Runnable对象或者Callable对象代表的线程
+		Future<Integer> f1 = pool.submit(new MyCallable(100));
+		Future<Integer> f2 = pool.submit(new MyCallable(200));
+
+		// V get()
+		Integer i1 = f1.get();
+		Integer i2 = f2.get();
+
+		System.out.println(i1);
+		System.out.println(i2);
+
+		// 结束
+		pool.shutdown();
+
+		public class MyCallable implements Callable<Integer> {
+
+			private int number;
+		
+			public MyCallable(int number) {
+				this.number = number;
+			}
+		
+			@Override
+			public Integer call() throws Exception {
+				int sum = 0;
+				for (int x = 1; x <= number; x++) {
+					sum += x;
+				}
+				return sum;
+			}
+		
+		}
+* 多线程程序实现的方式3的好处和弊端
+	* 好处：
+		* 可以有返回值
+		* 可以抛出异常
+		
+	* 弊端：
+		* 代码比较复杂，所以一般不用
+
+
+### 25.11_设计模式(简单工厂模式概述和使用)(了解)
+* A:简单工厂模式概述
+	* 又叫静态工厂方法模式，它定义一个具体的工厂类负责创建一些类的实例
+* B:优点
+	* 客户端不需要在负责对象的创建，从而明确了各个类的职责
+* C:缺点
+	* 这个静态工厂类负责所有对象的创建，如果有新的对象增加，或者某些对象的创建方式不同，就需要不断的修改工厂类，不利于后期的维护
+* D:案例演示
+	* 动物抽象类：public abstract Animal { public abstract void eat(); }
+	* 具体狗类：public class Dog extends Animal {}
+	* 具体猫类：public class Cat extends Animal {}
+	* 开始，在测试类中每个具体的内容自己创建对象，但是，创建对象的工作如果比较麻烦，就需要有人专门做这个事情，所以就知道了一个专门的类来创建对象。
+* 
+		public class AnimalFactory {
+			private AnimalFactory(){}
+		
+			//public static Dog createDog() {return new Dog();}
+			//public static Cat createCat() {return new Cat();}
+		
+			//改进
+			public static Animal createAnimal(String animalName) {
+				if(“dog”.equals(animalName)) {}
+				else if(“cat”.equals(animale)) {
+		
+				}else {
+					return null;
+				}
+			}
+		} 
+### 25.12_设计模式(工厂方法模式的概述和使用)(了解)
+* A:工厂方法模式概述
+	* 工厂方法模式中抽象工厂类负责定义创建对象的接口，具体对象的创建工作由继承抽象工厂的具体类实现。
+* B:优点
+	* 客户端不需要在负责对象的创建，从而明确了各个类的职责，如果有新的对象增加，只需要增加一个具体的类和具体的工厂类即可，不影响已有的代码，后期维护容易，增强了系统的扩展性
+* C:缺点
+	* 需要额外的编写代码，增加了工作量
+* D:案例演示
+* 
+		动物抽象类：public abstract Animal { public abstract void eat(); }
+		工厂接口：public interface Factory {public abstract Animal createAnimal();}
+		具体狗类：public class Dog extends Animal {}
+		具体猫类：public class Cat extends Animal {}
+		开始，在测试类中每个具体的内容自己创建对象，但是，创建对象的工作如果比较麻烦，就需要有人专门做这个事情，所以就知道了一个专门的类来创建对象。发现每次修改代码太麻烦，用工厂方法改进，针对每一个具体的实现提供一个具体工厂。
+		狗工厂：public class DogFactory implements Factory {
+			public Animal createAnimal() {…}
+		        }
+		猫工厂：public class CatFactory implements Factory {
+			public Animal createAnimal() {…}
+		        }  
+
+### 25.13_GUI(如何创建一个窗口并显示)
+* Graphical User Interface(图形用户接口)。
+* 
+		Frame  f = new Frame(“my window”);
+		f.setLayout(new FlowLayout());//设置布局管理器
+		f.setSize(500,400);//设置窗体大小
+		f.setLocation(300,200);//设置窗体出现在屏幕的位置
+		f.setIconImage(Toolkit.getDefaultToolkit().createImage("qq.png"));
+		f.setVisible(true);
+
+### 25.14_GUI(布局管理器)
+* FlowLayout（流式布局管理器）
+	* 从左到右的顺序排列。
+	* Panel默认的布局管理器。
+* BorderLayout（边界布局管理器）
+	* 东，南，西，北，中
+	* Frame默认的布局管理器。
+* GridLayout（网格布局管理器）
+	* 规则的矩阵
+* CardLayout（卡片布局管理器）
+	* 选项卡
+* GridBagLayout（网格包布局管理器）
+	* 非规则的矩阵
+### 25.15_GUI(窗体监听)
+	Frame f = new Frame("我的窗体");
+	//事件源是窗体,把监听器注册到事件源上
+	//事件对象传递给监听器
+	f.addWindowListener(new WindowAdapter() {
+	          public void windowClosing(WindowEvent e) {
+	                     //退出虚拟机,关闭窗口
+			System.exit(0);
+		}
+	});
+
+### 25.16_GUI(鼠标监听)
+### 25.17_GUI(键盘监听和键盘事件)
+### 25.18_GUI(动作监听)
+### 25.19_设计模式(适配器设计模式)(掌握)
+* a.什么是适配器
+	* 在使用监听器的时候, 需要定义一个类事件监听器接口.
+	* 通常接口中有多个方法, 而程序中不一定所有的都用到, 但又必须重写, 这很繁琐.
+	* 适配器简化了这些操作, 我们定义监听器时只要继承适配器, 然后重写需要的方法即可.
+* b.适配器原理
+	* 适配器就是一个类, 实现了监听器接口, 所有抽象方法都重写了, 但是方法全是空的.
+	* 适配器类需要定义成抽象的,因为创建该类对象,调用空方法是没有意义的
+	* 目的就是为了简化程序员的操作, 定义监听器时继承适配器, 只重写需要的方法就可以了.
+### 25.20_GUI(需要知道的) 
+* 事件处理
+	* 事件: 用户的一个操作
+	* 事件源: 被操作的组件
+	* 监听器: 一个自定义类的对象, 实现了监听器接口, 包含事件处理方法,把监听器添加在事件源上, 当事件发生的时候虚拟机就会自动调用监听器中的事件处理方法
+### 25.21_day25总结
+	把今天的知识点总结一遍。
 
 
 
