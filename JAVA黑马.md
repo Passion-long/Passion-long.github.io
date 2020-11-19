@@ -4726,7 +4726,7 @@ class AgeOutOfBoundsException extends Exception {
 	* 
 			Runtime r = Runtime.getRuntime();
 			//r.exec("shutdown -s -t 300");		//300秒后关机
-			r.exec("shutdown -a");				//取消关机
+			r.exec("shutdown -a");			//取消关机
 
 ### 25.03_多线程(Timer)(掌握)
 * Timer类:计时器
@@ -4739,6 +4739,8 @@ class AgeOutOfBoundsException extends Exception {
 				 */
 				public static void main(String[] args) throws InterruptedException {
 					Timer t = new Timer();
+					//在指定时间安排指定任务
+					//第一个参数,是安排的任务,第二个参数是执行的时间,第三个参数是过多长时间再重复执行
 					t.schedule(new MyTimerTask(), new Date(114,9,15,10,54,20),3000);
 					
 					while(true) {
@@ -4770,6 +4772,21 @@ class AgeOutOfBoundsException extends Exception {
 	* notifyAll()方法是唤醒所有线程
 	* JDK5之前无法唤醒指定的一个线程
 	* 如果多个线程之间通信, 需要使用notifyAll()通知所有线程, 用while来反复判断条件
+* if语句是在哪里等待,就在哪里起来
+* while循环是循环判断,每次都会判断标记
+  
+```
+/*1,在同步代码块中,用哪个对象锁,就用哪个对象调用wait方法
+ * 2,为什么wait方法和notify方法定义在Object这类中?
+ * 	因为锁对象可以是任意对象,Object是所有的类的基类,所以wait方法和notify方法需要定义在Object这个类中
+ * 3,sleep方法和wait方法的区别?
+ * a,sleep方法必须传入参数,参数就是时间,时间到了自动醒来
+ *   wait方法可以传入参数也可以不传入参数,传入参数就是在参数的时间结束后等待,不传入参数就是直接等待
+ * b,sleep方法在同步函数或同步代码块中,不释放锁,睡着了也抱着锁睡
+ * 	wait方法在同步函数或者同步代码块中,释放锁
+ */ 
+```
+
 ### 25.06_多线程(JDK1.5的新特性互斥锁)(掌握)
 * 1.同步
 	* 使用ReentrantLock类的lock()和unlock()方法进行同步
