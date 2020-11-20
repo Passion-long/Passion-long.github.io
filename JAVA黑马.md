@@ -5394,8 +5394,9 @@ public class Demo2_Reflect {
         j.run(new Orange());*/
         BufferedReader br = new BufferedReader(new FileReader("config.properties"));    //创建输入流对象,关联配置文件
         Class<?> clazz = Class.forName(br.readLine());                                  //读取配置文件一行内容,获取该类的字节码对象
-        Fruit f = (Fruit) clazz.newInstance();                                          //通过字节码对象创建实例对象
-        Juicer j = new Juicer();
+        Fruit f = (Fruit) clazz.newInstance();(被抛弃了)                                         //通过字节码对象创建实例对象
+        Juicer j = new Juicer();							//最新的API中java.lang.Class中的newInstance()创建对象的方法被舍弃了，
+											//只能通过获取构造器对象的方法来创建对象或者直接通过创建Class对象的方法。
         j.run(f);
     }
 
