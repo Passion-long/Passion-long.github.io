@@ -5538,9 +5538,9 @@ class Test {
 27.19_day27总结
 把今天的知识点总结一遍。
 
-
-
-
+### 非关系型数据库一般指NoSQL，包括Redis和MongoDB  
+* Redis：是最著名的键值存储。Redis是用C语言编写的。它是根据BSD授权的。
+* MongoDB：是一个面向文档的开源NoSQL数据库。MongoDB使用JSON之类的文档来存储任何数据。它是用c++写的。
 
 
 
