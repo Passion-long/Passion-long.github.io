@@ -5425,74 +5425,90 @@ class Juicer {
 }
 ```
 
-27.05_反射(通过反射获取带参构造方法并使用)
-Constructor
-Class类的newInstance()方法是使用该类无参的构造函数创建对象, 如果一个类没有无参的构造函数, 就不能这样创建了,可以调用Class类的getConstructor(String.class,int.class)方法获取一个指定的构造函数然后再调用Constructor类的newInstance("张三",20)方法创建对象
+### 27.05_反射(通过反射获取带参构造方法并使用)
+* Constructor
+	* Class类的newInstance()方法是使用该类无参的构造函数创建对象, 如果一个类没有无参的构造函数, 就不能这样创建了,可以调用Class类的getConstructor(String.class,int.class)方法获取一个指定的构造函数然后再调用Constructor类的newInstance("张三",20)方法创建对象  
 
-27.06_反射(通过反射获取成员变量并使用)
-Field
-Class.getField(String)方法可以获取类中的指定字段(可见的), 如果是私有的可以用getDeclaedField("name")方法获取,通过set(obj, "李四")方法可以设置指定对象上该字段的值, 如果是私有的需要先调用setAccessible(true)设置访问权限,用获取的指定的字段调用get(obj)可以获取指定对象中该字段的值
+### 27.06_反射(通过反射获取成员变量并使用)
+* Field
+	* Class.getField(String)方法可以获取类中的指定字段(可见的), 如果是私有的可以用getDeclaredField("name")方法获取,通过set(obj, "李四")方法可以设置指定对象上该字段的值, 如果是私有的需要先调用setAccessible(true)设置访问权限,用获取的指定的字段调用get(obj)可以获取指定对象中该字段的值  
 
-27.07_反射(通过反射获取方法并使用)
-Method
-Class.getMethod(String, Class...) 和 Class.getDeclaredMethod(String, Class...)方法可以获取类中的指定方法,调用invoke(Object, Object...)可以调用该方法,Class.getMethod("eat") invoke(obj) Class.getMethod("eat",int.class) invoke(obj,10)
+### 27.07_反射(通过反射获取方法并使用)
+* Method
+	* Class.getMethod(String, Class...) 和 Class.getDeclaredMethod(String, Class...)方法可以获取类中的指定方法,调用invoke(Object, Object...)可以调用该方法,Class.getMethod("eat") invoke(obj) Class.getMethod("eat",int.class) invoke(obj,10)  
 
-27.08_反射(通过反射越过泛型检查)
-A:案例演示
-ArrayList的一个对象，在这个集合中添加一个字符串数据，如何实现呢？
+### 27.08_反射(通过反射越过泛型检查)
+* A:案例演示
+	* ArrayList<Integer>的一个对象，在这个集合中添加一个字符串数据，如何实现呢？
+	* 泛型只在编译器有效，在运行期会被擦出掉
 
-27.09_反射(通过反射写一个通用的设置某个对象的某个属性为指定的值)
-A:案例演示
-public void setProperty(Object obj, String propertyName, Object value){}，此方法可将obj对象中名为propertyName的属性的值设置为value。
+### 27.09_反射(通过反射写一个通用的设置某个对象的某个属性为指定的值)
+* A:案例演示
+	* public void setProperty(Object obj, String propertyName, Object value){}，此方法可将obj对象中名为propertyName的属性的值设置为value。
 
-27.10_反射(练习)
-已知一个类，定义如下：
-package cn.itcast.heima;
-public class DemoClass { public void run() { System.out.println("welcome to heima!"); } }
-(1) 写一个Properties格式的配置文件，配置类的完整名称。
-(2) 写一个程序，读取这个Properties配置文件，获得类的完整名称并加载这个类，用反射的方式运行run方法。
+### 27.10_反射(练习)
+* 已知一个类，定义如下：
+	* package cn.itcast.heima;
+	* public class DemoClass { public void run() { System.out.println("welcome to heima!"); } }
+	* (1) 写一个Properties格式的配置文件，配置类的完整名称。
+	* (2) 写一个程序，读取这个Properties配置文件，获得类的完整名称并加载这个类，用反射的方式运行run方法。
 
-27.11_反射(动态代理的概述和实现)
-A:动态代理概述
+### 27.11_反射(动态代理的概述和实现)模式？
+* A:动态代理概述
 
-代理：本来应该自己做的事情，请了别人来做，被请的人就是代理对象。
-举例：春节回家买票让人代买
-动态代理：在程序运行过程中产生的这个对象,而程序运行过程中产生对象其实就是我们刚才反射讲解的内容，所以，动态代理其实就是通过反射来生成一个代理
-在Java中java.lang.reflect包下提供了一个Proxy类和一个InvocationHandler接口，通过使用这个类和接口就可以生成动态代理对象。JDK提供的代理只能针对接口做代理。我们有更强大的代理cglib，Proxy类中的方法创建动态代理类对象
-public static Object newProxyInstance(ClassLoader loader,Class<?>[] interfaces,InvocationHandler h)
-最终会调用InvocationHandler的方法
-InvocationHandler Object invoke(Object proxy,Method method,Object[] args)
+	* 代理：本来应该自己做的事情，请了别人来做，被请的人就是代理对象。
+	* 举例：春节回家买票让人代买
+	* 动态代理：在程序运行过程中产生的这个对象,而程序运行过程中产生对象其实就是我们刚才反射讲解的内容，所以，动态代理其实就是通过反射来生成一个代理
+	* 在Java中java.lang.reflect包下提供了一个Proxy类和一个InvocationHandler接口，通过使用这个类和接口就可以生成动态代理对象。JDK提供的代理只能针对接口做代理。我们有更强大的代理cglib，Proxy类中的方法创建动态代理类对象
+	* public static Object newProxyInstance(ClassLoader loader,Class<?>[] interfaces,InvocationHandler h)
+	* 最终会调用InvocationHandler的方法
+	* InvocationHandler Object invoke(Object proxy,Method method,Object[] args)
 
-27.12_设计模式(模版(Template)设计模式概述和使用)
-A:模版设计模式概述
-模版方法模式就是定义一个算法的骨架，而将具体的算法延迟到子类中来实现
-B:优点和缺点
-a:优点
-使用模版方法模式，在定义算法骨架的同时，可以很灵活的实现具体的算法，满足用户灵活多变的需求
-b:缺点
-如果算法骨架有修改的话，则需要修改抽象类 1,装饰 2,单例 3,简单工厂 4,工厂方法 5,适配器 6,模版
+### 27.12_设计模式(模版(Template)设计模式概述和使用)
+* A:模版设计模式概述
+	* 模版方法模式就是定义一个算法的骨架，而将具体的算法延迟到子类中来实现
+* B:优点和缺点
+	* a:优点
+		* 使用模版方法模式，在定义算法骨架的同时，可以很灵活的实现具体的算法，满足用户灵活多变的需求
+	* b:缺点
+		* 如果算法骨架有修改的话，则需要修改抽象类   
+  
+**1,装饰   
+2,单例   
+3,简单工厂   
+4,工厂方法   
+5,适配器   
+6,模版**  
 
-27.13_JDK5新特性(自己实现枚举类)
-A:枚举概述
-是指将变量的值一一列出来,变量的值只限于列举出来的值的范围内。举例：一周只有7天，一年只有12个月等。
-B:回想单例设计模式：单例类是一个类只有一个实例
-那么多例类就是一个类有多个实例，但不是无限个数的实例，而是有限个数的实例。这才能是枚举类。
-C:案例演示
-自己实现枚举类 1,自动拆装箱 2,泛型 3,可变参数 4,静态导入 5,增强for循环 6,互斥锁 7,枚举
-
-27.14_JDK5新特性(通过enum实现枚举类)
-A:案例演示
-通过enum实现枚举类
-
-27.15_JDK5新特性(枚举的注意事项)
-A:案例演示
-定义枚举类要用关键字enum
-所有枚举类都是Enum的子类
-枚举类的第一行上必须是枚举项，最后一个枚举项后的分号是可以省略的，但是如果枚举类有其他的东西，这个分号就不能省略。建议不要省略
-枚举类可以有构造器，但必须是private的，它默认的也是private的。
-枚举类也可以有抽象方法，但是枚举项必须重写该方法
-枚举在switch语句中的使用
-
+### 27.13_JDK5新特性(自己实现枚举类)
+* A:枚举概述
+	* 是指将变量的值一一列出来,变量的值只限于列举出来的值的范围内。举例：一周只有7天，一年只有12个月等。
+* B:回想单例设计模式：单例类是一个类只有一个实例
+	* 那么多例类就是一个类有多个实例，但不是无限个数的实例，而是有限个数的实例。这才能是枚举类。
+* C:案例演示
+	* 自己实现枚举类  
+	
+**1,自动拆装箱  
+2,泛型   
+3,可变参数  
+4,静态导入  
+5,增强for循环  
+6,互斥锁  
+7,枚举**  
+  
+### 27.14_JDK5新特性(通过enum实现枚举类)
+* A:案例演示
+	* 通过enum实现枚举类
+  
+### 27.15_JDK5新特性(枚举的注意事项)
+* A:案例演示
+* 定义枚举类要用关键字enum
+* 所有枚举类都是Enum的子类
+* 枚举类的第一行上必须是枚举项，最后一个枚举项后的分号是可以省略的，但是如果枚举类有其他的东西，这个分号就不能省略。建议不要省略
+* 枚举类可以有构造器，但必须是private的，它默认的也是private的。
+* 枚举类也可以有抽象方法，但是枚举项必须重写该方法
+* 枚举在switch语句中的使用
+  
 27.16_JDK5新特性(枚举类的常见方法)
 A:枚举类的常见方法
 int ordinal()
