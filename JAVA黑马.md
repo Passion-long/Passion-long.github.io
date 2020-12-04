@@ -2795,6 +2795,8 @@ public class Demo5_ArrayListArrayList {
 			}
 
 		}
+		
+		[1, 2, 3]
 		```
 	* b.比较器顺序(Comparator)
 		* 创建TreeSet的时候可以制定一个Comparator
