@@ -23,5 +23,8 @@
 [Waking-Up](https://github.com/wolverinn/Waking-Up)  
 黑马视频  
   
+* 面试推荐学习：  
+[CyC面试必备](https://github.com/CyC2018/CS-Notes)  
+  
 * Android学习资料推荐：  
 [gityuan](http://gityuan.com/)  
