@@ -1167,6 +1167,7 @@ class Outer {
 }
 ```
 ### 10.11_面向对象(成员内部类的面试题)(掌握)
+```
 class Test1_InnerClass {
 	public static void main(String[] args) {
 		Outer.Inner oi = new Outer().new Inner();
@@ -1188,6 +1189,7 @@ class Outer {
 		}
 	}
 }
+```
 ### 10.12_面向对象(局部内部类访问局部变量的问题)(掌握)
 * A:案例演示
 	* 局部内部类访问局部变量必须用final修饰
