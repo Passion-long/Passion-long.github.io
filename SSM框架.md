@@ -10,7 +10,7 @@ d. 提供公有的getter和setter方法: 属性
 e. 一般需要实现java.io.Serializable接口  
   
   
-### IOC和DI  
+### IOC（工厂模式）和DI  
 * IOC: 控制反转, 将对象的创建权反转给了Spring  
 * DI: 依赖注入, 前提必须有IOC的环境, Spring管理这个类的时候将类的依赖的属性注入(设置)进来  
   
