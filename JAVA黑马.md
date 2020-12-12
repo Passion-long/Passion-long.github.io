@@ -5479,7 +5479,58 @@ class Juicer {
 	* public static Object newProxyInstance(ClassLoader loader,Class<?>[] interfaces,InvocationHandler h)
 	* 最终会调用InvocationHandler的方法
 	* InvocationHandler Object invoke(Object proxy,Method method,Object[] args)
+```
+例子：
+public class ProxyObject implements Object {
 
+    Object obj;
+    
+    public ProxyObject() {
+        System.out.println("这是代理类");
+        obj = new ObjectImpl();
+    }
+    
+    public void action() {
+        System.out.println("代理开始");
+        obj.action();
+        System.out.println("代理结束");
+    }
+}
+Subject 
+
+public interface Obje*t {
+    void action();
+}
+RealSubject 
+
+public class ObjectImpl implements Object {
+    public void action() {
+        System.out.println("========");
+        System.out.println("========");
+        System.out.println("这是被代理的类");
+        System.out.println("========");
+        System.out.println("========");
+    }
+}
+Test 
+
+public class Test {
+    public static void main() {
+    	Object obj = new ProxyObject();
+        obj.action();
+}
+result 
+
+这是代理类
+代理开始
+========
+========
+这是被代理的类
+========
+========
+代理结束
+```
+  
 ### 27.12_设计模式(模版(Template)设计模式概述和使用)
 * A:模版设计模式概述
 	* 模版方法模式就是定义一个算法的骨架，而将具体的算法延迟到子类中来实现
@@ -5488,6 +5539,51 @@ class Juicer {
 		* 使用模版方法模式，在定义算法骨架的同时，可以很灵活的实现具体的算法，满足用户灵活多变的需求
 	* b:缺点
 		* 如果算法骨架有修改的话，则需要修改抽象类   
+```
+例子：
+AbstractClass 
+
+public abstract class Template {
+    public abstract void print();
+    
+    public void update() {
+        System.out.println("开始打印");
+        for (int i = 0; i < 10; i++) {
+            print();
+        }
+    }
+}
+ConcreteClass 
+
+public class TemplateConcrete extends Template {
+    @override
+    public void print() {
+        System.out.println("这是子类的实现");
+    }
+}
+Test 
+
+public class Test {
+
+    public static void main(String[] args) {
+        Template temp = new TemplateConcrete();
+        temp.update();
+    }
+}
+result 
+
+开始打印
+这是子类的实现
+这是子类的实现
+这是子类的实现
+这是子类的实现
+这是子类的实现
+这是子类的实现
+这是子类的实现
+这是子类的实现
+这是子类的实现
+这是子类的实现
+```
   
 **1,装饰   
 2,单例   
