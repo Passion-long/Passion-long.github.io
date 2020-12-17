@@ -1,5 +1,5 @@
 # Passion-long.github.io
-### 备战春招!!!  
+### 努力!拼搏!  
   
 1. [Android.md](https://github.com/Passion-long/Passion-long.github.io/blob/master/Android.md)  
 2. [C++.md](https://github.com/Passion-long/Passion-long.github.io/blob/master/C%2B%2B.md)  
