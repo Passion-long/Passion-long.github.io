@@ -382,6 +382,43 @@ class Car {
 * C:封装原则
 	* 将不需要对外提供的内容都隐藏起来。
 	* 把属性隐藏，提供公共方法对其访问。
+
+```
+import java.util.*;
+class Person{
+    String name;
+    private int age;
+
+    public void setAge(int a) {
+        if (a > 0 && a < 200) {
+            age = a;
+        }else {
+            System.out.println("重设");
+        }
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void speak() {
+        System.out.println(name + "..." + age);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Person p1 = new Person();
+        p1.name = "zhang";  //调用姓名属性并赋值
+        p1.age = 23;        //面向对象的封装，private只能类内访问。
+        p1.speak();            //调用行为
+
+        p1.setAge(-1);
+        int res = p1.getAge();
+        System.out.println(res);
+    }
+}
+```
 ### 06.14_面向对象(private关键字的概述和特点)(掌握)
 * A:人类赋值年龄的问题
 * B:private关键字特点
